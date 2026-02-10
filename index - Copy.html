@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mừng Đảng - Mừng Xuân | Phòng Hậu Cần - Kỹ Thuật</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Dancing+Script:wght@600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-red: #d32f2f;
+            --dark-red: #b71c1c;
+            --gold: #ffd700;
+            --cream: #fff8e1;
+            --text-dark: #333;
+            --white: #ffffff;
+            --nav-height-pc: 70px;
+            --nav-height-mobile: 110px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Pattern nhẹ */
+            padding-top: var(--nav-height-pc);
+        }
+
+        /* --- THANH BAR CHỨC NĂNG (Sticky Header) --- */
+        .sticky-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: var(--nav-height-pc);
+            border-bottom: 3px solid var(--primary-red);
+            overflow: hidden; /* Để pháo hoa không tràn */
+        }
+
+        /* Pháo hoa animation */
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: explode 2s infinite;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .bar-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* CSS cho cờ dạng tròn để tự thêm ảnh */
+        .circular-flag {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee; /* Màu nền chờ ảnh */
+            border: 2px solid var(--gold);
+            background-size: cover;
+            background-position: center;
+            background-image: url();
+            /* Gợi ý: Thêm ảnh bằng background-image trong HTML hoặc tại đây */
+            /* ví dụ: background-image: url('path/to/your/image.png'); */
+        }
+
+        .countdown-mini {
+            background: var(--primary-red);
+            color: var(--gold);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1rem;
+            border: 2px solid var(--gold);
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary-red);
+            color: var(--white);
+        }
+
+        /* --- HEADER CHÍNH --- */
+        header {
+            text-align: center;
+            padding: 30px 15px;
+            background: linear-gradient(to bottom, #fff, var(--cream));
+        }
+
+        .unit-name {
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--dark-red);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .slogan {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-red);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 0px var(--gold);
+        }
+
+        .sub-slogan {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .banner-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 5px solid var(--gold);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/1;
+            object-fit: cover;
+            display: block;
+            background: #ffebee; /* Màu nền chờ ảnh */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-red);
+            font-weight: bold;
+        }
+
+        /* --- PHẦN NỘI DUNG CHUNG --- */
+        section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            scroll-margin-top: calc(var(--nav-height-pc) + 20px);
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-red);
+            font-family: 'Merriweather', serif;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 5px auto 0;
+        }
+
+        /* --- 1. ĐẾM NGƯỢC --- */
+        .countdown-section {
+            text-align: center;
+        }
+
+        .popup-text {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--gold);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid var(--gold);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            background-image: url('https://via.placeholder.com/200x50/ffd700/000000?text=Ngua+Vang'), linear-gradient(rgba(211,47,47,0.9), rgba(211,47,47,0.9));
+            background-size: cover, cover;
+            background-blend-mode: overlay;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .date-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--primary-red);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .big-clock {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .time-box {
+            background: var(--primary-red);
+            color: var(--white);
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 0 var(--dark-red);
+            border: 2px solid var(--gold);
+        }
+
+        .time-val {
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .lunar-date {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* --- BOX LỜI CHÚC --- */
+        .wishes-box {
+            background: #fff;
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.1);
+            background-image: url('https://via.placeholder.com/400x200/ffd700/000000?text=Ngua+Vang+Phi+Tuoc+Dai'), linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8));
+            background-size: cover, cover;
+            background-position: center, center;
+            background-blend-mode: overlay;
+        }
+
+        .wish-content {
+            font-size: 1.2rem;
+            color: var(--gold);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn-change-wish {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-red);
+            color: white;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .btn-change-wish:hover {
+            transform: scale(1.1);
+            background: var(--dark-red);
+        }
+
+        /* --- 2. THƯ CHÚC TẾT --- */
+        .letter-container {
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            background-image: repeating-linear-gradient(#fff 0px, #fff 24px, #00b0ff22 25px);
+            line-height: 25px;
+            position: relative;
+        }
+
+        .letter-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+        }
+
+        .letter-content {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--dark-red);
+            text-align: justify;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 20px;
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+        }
+
+        /* --- 3. Ý NGHĨA XUÂN & NHIỆM VỤ --- */
+        .content-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-red);
+        }
+
+        .content-card p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed #ddd;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .task-list li::before {
+            content: '★';
+            color: var(--gold);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .task-list li strong {
+            color: var(--dark-red);
+        }
+
+        footer {
+            background: var(--dark-red);
+            color: var(--gold);
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 768px) {
+            body {
+                padding-top: var(--nav-height-mobile);
+            }
+
+            .sticky-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+
+            .bar-left {
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+            
+            .nav-menu {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                /* Ẩn thanh cuộn nhưng vẫn scroll được */
+                scrollbar-width: none; 
+                -ms-overflow-style: none;
+            }
+            .nav-menu::-webkit-scrollbar { 
+                display: none; 
+            }
+
+            .countdown-mini {
+                font-size: 0.9rem;
+                padding: 4px 10px;
+                min-width: 140px;
+            }
+
+            .big-clock {
+                gap: 5px;
+            }
+
+            .time-box {
+                width: 60px;
+                height: 60px;
+            }
+
+            .time-val {
+                font-size: 1.5rem;
+            }
+
+            .slogan {
+                font-size: 1.4rem;
+            }
+            
+            .letter-content {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sticky-bar">
+        <div class="bar-left">
+            <div style="display: flex; gap:10px; align-items: center;">
+                
+                <!-- Để thêm ảnh, hãy dùng style: style="background-image: url('link-anh-co-dang.png')" -->
+                <div class="circular-flag" title="Cờ Đảng" style="background-image: url('https://xdcs.cdnchinhphu.vn/446259493575335936/2023/3/10/dangky-1678414634214362948075.jpg')"></div>
+                <!-- Để thêm ảnh, hãy dùng style: style="background-image: url('link-anh-co-to-quoc.png')" -->
+                <div class="circular-flag" title="Cờ Tổ Quốc" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1280px-Flag_of_Vietnam.svg.png')"></div>
+            </div>
+            <div class="countdown-mini" id="mini-timer">00:00:00:00</div>
+        </div>
+        <div class="nav-menu">
+            <a href="#countdown" class="nav-link">Đếm ngược</a>
+            <a href="#letter" class="nav-link">Thư chúc Tết</a>
+            <a href="#meaning" class="nav-link">Ý nghĩa Xuân</a>
+            <a href="#tasks" class="nav-link">Nhiệm vụ HC-KT</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="unit-name">
+            TRƯỜNG QUÂN SỰ QUÂN KHU 5
+            PHÒNG HẬU CẦN – KỸ THUẬT<br>
+            
+        </div>
+        <h1 class="slogan">MỪNG ĐẢNG – MỪNG XUÂN</h1>
+        <p class="sub-slogan">Xuân mới – Khí thế mới – Quyết tâm mới<br>Hoàn thành xuất sắc mọi nhiệm vụ</p>
+        
+        <div class="banner-container">
+            <div class="banner-img">
+                <img src="https://via.placeholder.com/1000x250/d32f2f/FFFFFF?text=ANH+BANNER+TET+4:1" alt="Banner Chúc Mừng Năm Mới" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="countdown" class="countdown-section">
+            <div class="popup-text">Đón Tết Nguyên Đán Bính Ngọ</div>
+            
+            <div class="date-info">
+                <span style="font-size: 1.5rem;">📅</span>
+                <span>Tết Nguyên Đán: Thứ Ba, 17 tháng 2, 2026</span>
+            </div>
+
+            <div class="big-clock">
+                <div class="time-box">
+                    <span class="time-val" id="days">00</span>
+                    <span class="time-label">Ngày</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-val" id="hours">00</span>
+                    <span class="time-label">Giờ</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-val" id="minutes">00</span>
+                    <span class="time-label">Phút</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-val" id="seconds">00</span>
+                    <span class="time-label">Giây</span>
+                </div>
+            </div>
+
+            <div class="lunar-date" id="lunar-today">
+                Đang tải lịch âm...
+            </div>
+
+            <div class="wishes-box">
+                <div class="wish-content" id="wish-display">
+                    Chúc mừng năm mới - Vạn sự như ý
+                </div>
+                <button class="btn-change-wish" onclick="randomWish()">Thay đổi lời chúc ↻</button>
+            </div>
+        </section>
+
+        <section id="letter">
+            <h2 class="section-title">Thư Chúc Tết</h2>
+            <div class="letter-container">
+                <div class="letter-img">
+                    <img src="https://via.placeholder.com/800x300/ffecb3/d32f2f?text=ANH+THU+TRUONG+CHUC+TET" alt="Ảnh chúc tết" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="letter-content">
+                    <p>“Nhân dịp Tết Nguyên Đán, Đảng ủy, Ban Giám hiệu Trường Quân sự Quân khu 5 thân ái gửi tới toàn thể cán bộ, giảng viên, nhân viên, chiến sĩ Phòng Hậu cần – Kỹ thuật và gia đình lời chúc mừng năm mới tốt đẹp nhất.</p>
+                    <br>
+                    <p>Chúc các đồng chí năm mới mạnh khỏe, đoàn kết, phát huy truyền thống, chủ động, sáng tạo, hoàn thành xuất sắc nhiệm vụ bảo đảm hậu cần, kỹ thuật cho Nhà trường.”</p>
+                </div>
+                <div class="letter-signature">
+                    ĐẢNG ỦY - BAN GIÁM HIỆU
+                </div>
+            </div>
+        </section>
+
+        <section id="meaning">
+            <h2 class="section-title">Ý Nghĩa Xuân</h2>
+            <div class="content-card">
+                <p>Mùa Xuân là mùa mở đầu cho một năm mới, mang theo hơi thở của đất trời và sức sống mãnh liệt của vạn vật. Đối với người Việt Nam, Tết Nguyên Đán không chỉ là dịp chuyển giao giữa năm cũ và năm mới, mà còn là thời khắc thiêng liêng để hướng về cội nguồn, tri ân ông bà tổ tiên và sum họp gia đình.</p>
+                <p>Trong môi trường Quân đội, mùa xuân còn mang ý nghĩa của sự rèn luyện và sẵn sàng chiến đấu. "Xuân chiến sĩ" là sự hòa quyện giữa tình cảm gia đình ấm áp và tinh thần trách nhiệm cao cả với Tổ quốc. Mỗi cán bộ, chiến sĩ đón xuân nhưng không quên nhiệm vụ, biến niềm vui năm mới thành động lực để phấn đấu, rèn đức, luyện tài.</p>
+                <p>Chào đón Xuân Bính Ngọ 2026, toàn thể Phòng Hậu cần - Kỹ thuật tiếp tục phát huy truyền thống vẻ vang, giữ vững khí thế "Quyết thắng", đảm bảo đời sống vật chất, tinh thần và trang bị kỹ thuật tốt nhất, góp phần xây dựng đơn vị vững mạnh toàn diện.</p>
+            </div>
+        </section>
+
+        <section id="tasks">
+            <h2 class="section-title">Công Tác Hậu Cần – Kỹ Thuật</h2>
+            <div class="content-card" style="border-top-color: var(--gold);">
+                <ul class="task-list">
+                    <li>
+                        <span><strong>Bảo đảm đầy đủ vật chất, kỹ thuật:</strong> Duy trì lượng dự trữ, sẵn sàng cho công tác huấn luyện và Sẵn sàng chiến đấu (SSCĐ) trong mọi tình huống.</span>
+                    </li>
+                    <li>
+                        <span><strong>Quản lý chặt chẽ trang bị:</strong> Thực hiện tốt cuộc vận động 50, giữ tốt dùng bền, an toàn tiết kiệm đối với cơ sở vật chất, vũ khí trang bị.</span>
+                    </li>
+                    <li>
+                        <span><strong>Chăm lo đời sống, sức khỏe bộ đội:</strong> Nâng cao chất lượng bữa ăn ngày Tết, đảm bảo vệ sinh an toàn thực phẩm và quân y.</span>
+                    </li>
+                    <li>
+                        <span><strong>Xây dựng Phòng HC–KT:</strong> Hướng tới sự chính quy, hiện đại, mẫu mực trong tác phong công tác và thực hiện nhiệm vụ.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Phòng Hậu Cần - Kỹ Thuật | Trường Quân sự Quân khu 5</p>
+        <p>Chúc Mừng Năm Mới - Thắng Lợi Mới</p>
+    </footer>
+
+    <script>
+        // 1. DỮ LIỆU LỜI CHÚC
+        const wishes = [
+            "An khang thịnh vượng - Vạn sự như ý",
+            "Tân niên vạn phúc - Phú quý khang ninh",
+            "Phúc lộc vẹn toàn - Tài lộc vĩnh cửu",
+            "Cung hỉ phát tài - Tấn tài tấn lộc",
+            "Gia đạo bình an - Phúc lộc miên man",
+            "Mã đáo thành công - Công thành danh toại",
+            "Sức khỏe dồi dào - Hạnh phúc viên mãn",
+            "Vàng bạc đầy kho - Chẳng chút âu lo",
+            "Sống lâu trăm tuổi - Trẻ mãi không già",
+            "Phúc như Đông Hải - Thọ tỷ Nam Sơn",
+            "An khang trường thọ - Con cháu thảo hiền",
+            "Bách niên giai lão - Vạn sự an nhiên",
+            "Tết này hơn Tết xưa - Tiền vô như nước, tình vào đầy tim",
+            "Năm mới rực rỡ - Đón chờ thành công",
+            "Tiền đầy túi - Ví đầy tiền - Ăn tết vui",
+            "Sự nghiệp thăng hoa - Cả nhà sung túc",
+            "Ăn Tết linh đình - Có bồ cực xinh",
+            "Lộc thịnh viên - Tài thăng hoa",
+            "Tâm an nhiên - Đời hiển vinh",
+            "Phúc đầy nhà - Lộc tận cửa",
+            "Ý cát tường - Sự hanh thông"
+        ];
+
+        function randomWish() {
+            const randomIndex = Math.floor(Math.random() * wishes.length);
+            const wishElement = document.getElementById("wish-display");
+            // Hiệu ứng fade nhẹ
+            wishElement.style.opacity = 0;
+            setTimeout(() => {
+                wishElement.innerText = wishes[randomIndex];
+                wishElement.style.opacity = 1;
+            }, 200);
+        }
+
+        // 2. ĐẾM NGƯỢC (Tết Bính Ngọ 17/02/2026)
+        const tetDate = new Date("Feb 17, 2026 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = tetDate - now;
+
+            // Tính toán thời gian
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Cập nhật đồng hồ to
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+            // Cập nhật đồng hồ mini trên thanh bar
+            const miniStr = `${days} ngày ${hours}:${minutes}:${seconds}`;
+            document.getElementById("mini-timer").innerText = miniStr;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Chạy ngay lập tức
+
+        // 3. GIẢ LẬP LỊCH ÂM (Đơn giản cho Demo)
+        // Trong thực tế, cần thư viện chuyên dụng để chuyển đổi Dương -> Âm lịch chính xác
+        function getSimpleLunarDate() {
+            const today = new Date();
+            // Đây chỉ là code giả lập hiển thị ngày âm tượng trưng
+            // Logic: Giả sử hôm nay là ngày thực tế, hiển thị ngày âm tương ứng ước lượng
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateStr = today.toLocaleDateString('vi-VN', options);
+            
+            // Text giả định (bạn cần thư viện lunisolar để chính xác)
+            // Ví dụ này hardcode hiển thị ngày giả định là 23 tháng Chạp nếu gần tết
+            let lunarText = "Ngày thường: " + dateStr + " (Dương lịch)";
+            
+            // Check nếu gần ngày Tết 2026 (Demo)
+            const currentYear = today.getFullYear();
+            if(currentYear === 2026 && today.getMonth() === 1 && today.getDate() < 17) {
+                 const lunarDay = 30 - (17 - today.getDate());
+                 lunarText = `Hôm nay: Ngày ${lunarDay} tháng Chạp năm Ất Tỵ`;
+            } else {
+                 lunarText = `Thời gian thực: ${dateStr}`; 
+            }
+            
+            document.getElementById("lunar-today").innerText = lunarText;
+        }
+        getSimpleLunarDate();
+
+        // 4. SCROLL SPY (Menu tự đổi màu đỏ)
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.onscroll = () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // -150px để active sớm hơn một chút khi lướt tới
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((li) => {
+                li.classList.remove("active");
+                if (li.getAttribute("href").includes(current)) {
+                    li.classList.add("active");
+                }
+            });
+        };
+    </script>
+</body>
+</html>
