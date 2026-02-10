@@ -390,6 +390,7 @@
             font-size: 1.5rem;
             color: var(--primary-red);
             margin-bottom: 30px;
+            font-family: 'Dancing Script', cursive;
             font-style: italic;
             background: rgba(255, 255, 255, 0.8);
             padding: 15px 30px;
@@ -397,6 +398,7 @@
             border: 2px solid var(--gold);
             display: inline-block;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .day-number {
@@ -407,6 +409,8 @@
             padding: 5px 10px;
             border-radius: 10px;
             margin-right: 5px;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         .snake-icon {
@@ -512,6 +516,14 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             border-top: 4px solid var(--primary-red);
+            height: 350px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .content-card:hover {
+            transform: scale(1.05);
         }
 
         .content-card p {
@@ -575,13 +587,109 @@
 
         .modal-content {
             background-color: var(--white);
-            margin: 10% auto;
-            padding: 20px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
             border: 2px solid var(--gold);
             border-radius: 10px;
             width: 80%;
             max-width: 600px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Slideshow */
+        .slideshow-container {
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+            width: 100%;
+            height: 400px; /* Adjust based on content */
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .slide.next {
+            transform: translateX(100%);
+        }
+
+        .slide img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .slide-text {
+            text-align: center;
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: var(--primary-red);
         }
 
         .close {
@@ -649,6 +757,52 @@
             
             .letter-content {
                 font-size: 1.3rem;
+            }
+
+            /* Modal responsive */
+            .modal-content {
+                width: 90%;
+                padding: 20px;
+                max-height: 90vh;
+            }
+
+            .slideshow-container {
+                height: 350px;
+            }
+
+            .slide img {
+                height: 200px;
+            }
+
+            .slide-text h3 {
+                font-size: 1.2rem;
+            }
+
+            .slide-text p {
+                font-size: 0.9rem;
+            }
+
+            .lunar-date {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+
+            .day-number {
+                font-size: 1.5rem;
+                padding: 3px 8px;
+            }
+
+            .wishes-box {
+                padding: 30px;
+            }
+
+            .wish-content {
+                font-size: 1.5rem;
+            }
+
+            .meaning-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
         }
     </style>
@@ -765,15 +919,18 @@
             <h2 class="section-title">Thư Chúc Tết</h2>
             <div class="letter-container">
                 <div class="letter-img">
-                    <img src="https://cdn11.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture/News/News_expe_19790/19790.png?version=090044" alt="Ảnh chúc tết" style="width:100%; height:100%; object-fit:cover;">
+                    <img src="anh1.jpg" alt="Ảnh chúc tết" style="width:100%; height:100%; object-fit:cover;">
                 </div>
                 <div class="letter-content">
-                    <p>“Nhân dịp Tết Nguyên Đán, Đảng ủy, Ban Giám hiệu Trường Quân sự Quân khu 5 thân ái gửi tới toàn thể cán bộ, giảng viên, nhân viên, chiến sĩ Phòng Hậu cần – Kỹ thuật và gia đình lời chúc mừng năm mới tốt đẹp nhất.</p>
+                    <p>“Nhân dịp Tết Nguyên đán Xuân Bính Ngọ 2026, Đảng uỷ, Chỉ huy Phòng Hậu cần – Kỹ thuật trân trọng gửi tới toàn thể cán bộ, nhân viên, chiến sĩ trong Phòng cùng gia đình lời chúc mừng năm mới sức khỏe, hạnh phúc và thắng lợi mới.</p>
                     <br>
-                    <p>Chúc các đồng chí năm mới mạnh khỏe, đoàn kết, phát huy truyền thống, chủ động, sáng tạo, hoàn thành xuất sắc nhiệm vụ bảo đảm hậu cần, kỹ thuật cho Nhà trường.”</p>
+                    <p>Phát huy truyền thống đoàn kết, chủ động, sáng tạo và tinh thần trách nhiệm cao, Đảng uỷ, Chỉ huy Phòng tin tưởng rằng mỗi cán bộ, nhân viên, chiến sĩ sẽ tiếp tục nỗ lực phấn đấu, khắc phục khó khăn, hoàn thành xuất sắc mọi nhiệm vụ được giao, góp phần bảo đảm tốt công tác hậu cần – kỹ thuật, xây dựng đơn vị vững mạnh toàn diện, đáp ứng yêu cầu nhiệm vụ của Nhà trường trong tình hình mới.</p>
+                    <br>
+                    <p>Kính chúc các đồng chí và gia đình một năm mới an khang, thịnh vượng, đoàn kết, tiến bộ và thành công."</p>
                 </div>
                 <div class="letter-signature">
-                    ĐẢNG ỦY - BAN GIÁM HIỆU
+                    ĐẢNG UỶ – CHỈ HUY <br>
+PHÒNG HẬU CẦN – KỸ THUẬT
                 </div>
             </div>
         </section>
@@ -781,36 +938,32 @@
         <section id="meaning">
             <h2 class="section-title">Ý Nghĩa Xuân</h2>
             <div class="meaning-grid">
-                <div class="content-card">
-                    <img src="https://cdn.tgdd.vn/Files/2021/12/03/1402134/tong-hop-10-loai-hoa-trang-tri-tet-dep-va-y-nghia-cua-tung-loai-202112031629132188.jpg" alt="Hoa Tết" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Hoa Tết</h3>
-                    <p>Hoa đào tượng trưng cho sự may mắn, hoa mai cho sự kiên cường và kiên trì, hoa cúc cho sự tinh khiết và lòng thành. Các loại hoa trong dịp Tết mang ý nghĩa chúc mừng năm mới tươi sáng, hạnh phúc và thịnh vượng.</p>
+                <div class="content-card" onclick="openModal('bac-ho-modal')" style="cursor: pointer;">
+                    <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2020/1/22/780102/Bac-Ho-1-01.jpg" alt="Bàn Thờ Bác Hồ" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+                    <h3>Ý Nghĩa Bàn Thờ Chủ Tịch Hồ Chí Minh</h3>
+                    <p>Bàn thờ Chủ tịch Hồ Chí Minh trong Quân đội nhân dân Việt Nam có ý nghĩa chính trị, tư tưởng và tinh thần đặc biệt sâu sắc, thể hiện lòng tôn kính và biết ơn vô hạn của cán bộ, chiến sĩ đối với Chủ tịch Hồ Chí Minh – vị lãnh tụ thiên tài của Đảng và Nhân dân ta... (Click để xem thêm)</p>
                 </div>
-                <div class="content-card">
+                <div class="content-card" onclick="openModal('hoa-modal')">
+                    <img src="https://cdn.tgdd.vn/Files/2021/12/03/1402134/tong-hop-10-loai-hoa-trang-tri-tet-dep-va-y-nghia-cua-tung-loai-202112031629132188.jpg" alt="Hoa Tết" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+                    <h3>Ý Nghĩa Hoa Đào</h3>
+                    <p>Hoa đào là biểu tượng đặc trưng của mùa xuân miền Bắc, tượng trưng cho sự sinh sôi, đổi mới và may mắn... (Click để xem thêm)</p>
+                </div>
+                <div class="content-card" onclick="openModal('ngu-qua-modal')">
                     <img src="https://upload.wikimedia.org/wikipedia/vi/3/3d/M%C4%83m_ng%C5%A9_qu%E1%BA%A3_T%E1%BA%BFt.png" alt="Mâm Ngũ Quả" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
                     <h3>Ý Nghĩa Mâm Ngũ Quả</h3>
-                    <p>Mâm ngũ quả là biểu tượng cho sự sung túc, đầy đủ và ngũ phúc lâm môn. Mỗi loại quả mang ý nghĩa riêng: cam tượng trưng cho vàng, quýt cho sự may mắn, bưởi cho sự tròn đầy, dứa cho sự thịnh vượng, mãng cầu cho sự giàu có.</p>
+                    <p>Mâm ngũ quả là nét đẹp văn hóa truyền thống không thể thiếu trong ngày Tết Nguyên đán của người Việt Nam, thể hiện đạo lý “uống nước nhớ nguồn”... (Click để xem thêm)</p>
                 </div>
-                <div class="content-card">
+                <div class="content-card" onclick="openModal('mon-an-modal')">
                     <img src="https://shop.annam-gourmet.com/pub/media/magefan_blog/m_n_n_ng_y_t_t.png" alt="Thức Ăn Tết" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Thức Ăn</h3>
-                    <p>Bánh chưng tượng trưng cho đất trời, bánh tét cho sự gắn kết gia đình. Thịt gà, giò lụa, xôi gấc mang ý nghĩa cầu mong năm mới ấm no, hạnh phúc. Các món ăn truyền thống thể hiện lòng biết ơn tổ tiên và mong ước năm mới tốt lành.</p>
+                    <h3>Ý Nghĩa Các Món Ăn Ngày Tết</h3>
+                    <p>Các món ăn ngày Tết của người Việt mang đậm bản sắc truyền thống, thể hiện ước mong no đủ, sum vầy và may mắn trong năm mới. Tiêu biểu có bánh chưng, bánh tét tượng trưng cho đất trời và lòng biết ơn tổ tiên; thịt kho, thịt đông thể hiện sự sung túc; giò chả mang ý nghĩa tròn đầy, gắn kết; dưa hành, củ kiệu giúp cân vị, tượng trưng cho sự hài hòa; canh măng, nem rán góp phần làm phong phú mâm cỗ ngày Tết. Mâm cơm Tết không chỉ là bữa ăn truyền thống mà còn là biểu tượng của tình cảm gia đình và sự đoàn viên.</p>
                 </div>
-                <div class="content-card">
-                    <img src="https://govi.vn/wp-content/uploads/2023/01/li-xi-nam-moi.jpg" alt="Lì Xì" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Lì Xì</h3>
-                    <p>Lì xì là phong tục mừng tuổi cho trẻ em, tượng trưng cho sự sinh sôi nảy nở và tài lộc. Phong bao đỏ chứa đựng lời chúc sức khỏe, học hành tiến bộ và tiền đầy túi. Đây là cách truyền tải tình cảm và mong ước cho thế hệ trẻ.</p>
+                 <div class="content-card" onclick="openModal('banh-modal')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzA3tyw71mgcrrshZVsE9GmhmtumvoAuY5Fg&s" alt="Thức Ăn Tết" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
+                    <h3>Bánh Chưng- Bánh Tét</h3>
+                    <p>Bánh chưng – bánh tét là những món bánh truyền thống không thể thiếu trong ngày Tết Nguyên đán của dân tộc Việt Nam, tượng trưng cho lòng biết ơn tổ tiên và ước mong cuộc sống no đủ, ấm no. Bánh chưng hình vuông biểu trưng cho đất, bánh tét dạng trụ dài gắn liền với văn hóa các vùng miền, thể hiện sự sung túc, tròn đầy. Việc gói và dâng bánh trong ngày Tết góp phần gìn giữ truyền thống tốt đẹp, thắt chặt tình cảm gia đình và cầu mong một năm mới an lành, hạnh phúc.</p>
                 </div>
-                <div class="content-card">
-                    <img src="https://www.fahasa.com/blog/wp-content/uploads/2024/12/cay-neu-la-gi.png" alt="Cây Nêu" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Cây Nêu</h3>
-                    <p>Cây nêu là biểu tượng xua đuổi tà ma, bảo vệ gia đình. Đặt cây nêu trước nhà để cầu mong năm mới bình an, tránh được những điều xấu. Đây là tục lệ cổ xưa thể hiện niềm tin vào sự bảo vệ của thần linh.</p>
-                </div>
-                <div class="content-card">
-                    <img src="https://cdn-media.sforum.vn/storage/app/media/wp-content/uploads/2023/11/xong-dat-la-gi-thumbnail.jpg" alt="Xông Đất" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Xông Đất</h3>
-                    <p>Xông đất là tục đi thăm hỏi người lớn tuổi đầu năm để cầu may. Người xông đất thường là những người tuổi hợp với gia chủ, mang theo lời chúc sức khỏe, tài lộc. Đây là cách thể hiện sự kính trọng và gắn kết cộng đồng.</p>
-                </div>
+                
             </div>
         </section>
 
@@ -967,6 +1120,154 @@
                 audio.play();
             }
         }, { once: true });
+
+        // Slideshow
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function changeSlide(n) {
+            let slides = document.querySelectorAll('#hoa-modal .slide');
+            let current = slideIndex - 1;
+            let next = (slideIndex - 1 + n + slides.length) % slides.length;
+            
+            // Set direction classes
+            if (n > 0) {
+                slides[current].classList.add('prev');
+                slides[next].classList.add('next');
+            } else {
+                slides[current].classList.add('next');
+                slides[next].classList.add('prev');
+            }
+            
+            setTimeout(() => {
+                showSlides(slideIndex += n);
+            }, 50);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.querySelectorAll('#hoa-modal .slide');
+            let dots = document.querySelectorAll('#hoa-modal .dot');
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active', 'prev', 'next');
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].classList.add('active');
+            dots[slideIndex-1].className += " active";
+        }
     </script>
+
+    <!-- Modal for Hoa Tết -->
+    <div id="hoa-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('hoa-modal')">&times;</span>
+            <h2>Ý Nghĩa Các Loài Hoa Tết</h2>
+            <div class="slideshow-container">
+                <div class="slide">
+                    <img src="https://cdn.tgdd.vn/Files/2021/12/03/1402134/tong-hop-10-loai-hoa-trang-tri-tet-dep-va-y-nghia-cua-tung-loai-202112031629132188.jpg" alt="Hoa Đào" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
+                    <div class="slide-text">
+                        <h3>Hoa Đào</h3>
+                        <p>Hoa đào là biểu tượng đặc trưng của mùa xuân miền Bắc, tượng trưng cho sự sinh sôi, đổi mới và may mắn. Sắc hồng thắm của hoa đào được xem là mang lại vượng khí, xua đuổi điều không may, đem đến bình an, hạnh phúc và khởi đầu tốt đẹp cho năm mới.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfaxYvXO_lJP0QyAU20bSGLMVes6KlrYjwOA&s" alt="Hoa Mai" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
+                    <div class="slide-text">
+                        <h3>Hoa Mai</h3>
+                        <p>Hoa mai gắn liền với Tết cổ truyền của người dân miền Nam, tượng trưng cho sự phú quý, thịnh vượng và thành công. Màu vàng rực rỡ của hoa mai thể hiện niềm vui, sự ấm no, sung túc và niềm tin vào tương lai tươi sáng, an lành.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://imgcdn.tapchicongthuong.vn/thumb/w_1000/tcct-media/21/3/7/hoa_ly_trang_1.jpg" alt="Hoa Ly" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
+                    <div class="slide-text">
+                        <h3>Hoa Ly</h3>
+                        <p>Hoa ly mang vẻ đẹp thanh cao, tinh khiết, tượng trưng cho sự trang trọng, hòa hợp và đoàn viên. Hương thơm dịu nhẹ của hoa ly thể hiện ước mong về cuộc sống yên ấm, hạnh phúc, sự gắn bó bền chặt giữa các thành viên trong gia đình.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQo6Bfrk2_M_jlC_vdIfwlTUc7457MsarPyQ&s" alt="Hoa Lay Ơn" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
+                    <div class="slide-text">
+                        <h3>Hoa Lay Ơn</h3>
+                        <p>Hoa lay ơn (kiếm lan) với dáng vươn thẳng, mạnh mẽ, biểu trưng cho ý chí vươn lên, sự trung thành và hiếu nghĩa. Hoa lay ơn thường được trưng trong dịp Tết với mong ước năm mới thuận lợi, thành đạt, gia đình sum vầy và cuộc sống ngày càng phát triển.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJv7R0eE5V6fS-484wv37rVExTTGvgNdSG3Q&s" alt="Hoa Cúc" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
+                    <div class="slide-text">
+                        <h3>Hoa Cúc</h3>
+                        <p>Hoa cúc là loài hoa truyền thống gắn bó lâu đời với đời sống văn hóa tinh thần của người Việt trong dịp Tết Nguyên đán. Hoa cúc tượng trưng cho sự trường thọ, phúc lộc, hiếu nghĩa và bền bỉ, thể hiện ước mong về cuộc sống an lành, gia đình hòa thuận, con cháu sum vầy. Sắc vàng tươi của hoa cúc mang ý nghĩa phú quý, thịnh vượng và may mắn, đồng thời biểu trưng cho khí chất ngay thẳng, thanh cao, kiên cường vượt qua khó khăn. Trưng hoa cúc trong ngày Tết còn thể hiện lòng kính trọng đối với tổ tiên, mong cầu một năm mới bình an, ổn định và phát triển bền vững.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://images.baodantoc.vn/uploads/2024/Thang-12/Ngay-16/My-Thanh/8b975039f60a905759337df6743a8748hoa-van-tho-tet-29.jpg" alt="Hoa Vạn Thọ" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
+                    <div class="slide-text">
+                        <h3>Hoa Vạn Thọ</h3>
+                        <p>Hoa vạn thọ là loài hoa quen thuộc trong ngày Tết cổ truyền của người Việt, mang ý nghĩa trường thọ, sức khỏe, phúc lộc và may mắn. Tên gọi “vạn thọ” thể hiện ước mong về cuộc sống lâu bền, gia đình bình an, con cháu hiếu thuận, sum vầy. Sắc vàng rực rỡ của hoa vạn thọ tượng trưng cho sự sung túc, thịnh vượng và niềm vui, đồng thời mang ý nghĩa xua đuổi điều không may, đón vận khí tốt lành trong năm mới. Việc trưng hoa vạn thọ trong dịp Tết còn thể hiện lòng kính nhớ tổ tiên, cầu mong một năm mới an khang, hạnh phúc và viên mãn.</p>
+                    </div>
+                </div>
+                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                <a class="next" onclick="changeSlide(1)">&#10095;</a>
+            </div>
+            <div class="dots">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot" onclick="currentSlide(6)"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Mâm Ngũ Quả -->
+    <div id="ngu-qua-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('ngu-qua-modal')">&times;</span>
+            <h2>Ý Nghĩa Mâm Ngũ Quả</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/vi/3/3d/M%C4%83m_ng%C5%A9_qu%E1%BA%A3_T%E1%BA%BFt.png" alt="Mâm Ngũ Quả" style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
+            <p>Mâm ngũ quả là nét đẹp văn hóa truyền thống không thể thiếu trong ngày Tết Nguyên đán của người Việt Nam, thể hiện đạo lý "uống nước nhớ nguồn", lòng hiếu kính đối với tổ tiên và ước vọng về một năm mới an lành, hạnh phúc. "Ngũ quả" tượng trưng cho năm loại quả với năm màu sắc khác nhau, đại diện cho thuyết ngũ hành (Kim – Mộc – Thủy – Hỏa – Thổ), hàm ý mong cầu sự hài hòa của đất trời, vạn vật sinh sôi, gia đình sung túc, đủ đầy.</p>
+            <p>Mỗi loại quả được bày biện trên mâm đều mang một ý nghĩa riêng, gửi gắm ước mong về sức khỏe, tài lộc, may mắn và bình an trong năm mới. Tùy theo phong tục từng vùng miền, mâm ngũ quả có cách lựa chọn và sắp xếp khác nhau, nhưng đều chung một giá trị tinh thần sâu sắc, thể hiện niềm tin, hy vọng và khát vọng vươn lên trong cuộc sống.</p>
+            <p>Trong không khí thiêng liêng của ngày đầu xuân, mâm ngũ quả không chỉ là lễ vật dâng lên tổ tiên mà còn là biểu tượng của sự đoàn viên, gắn kết gia đình, nhắc nhở con cháu gìn giữ và phát huy những giá trị văn hóa truyền thống tốt đẹp của dân tộc Việt Nam.</p>
+        </div>
+    </div>
+
+    <!-- Modal for Các Món Ăn Ngày Tết -->
+    <div id="mon-an-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('mon-an-modal')">&times;</span>
+            <h2>Ý Nghĩa Các Món Ăn Ngày Tết</h2>
+            <img src="https://shop.annam-gourmet.com/pub/media/magefan_blog/m_n_n_ng_y_t_t.png" alt="Thức Ăn Tết" style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
+            <p>Các món ăn ngày Tết của người Việt mang đậm bản sắc truyền thống, thể hiện ước mong no đủ, sum vầy và may mắn trong năm mới. Tiêu biểu có bánh chưng, bánh tét tượng trưng cho đất trời và lòng biết ơn tổ tiên; thịt kho, thịt đông thể hiện sự sung túc; giò chả mang ý nghĩa tròn đầy, gắn kết; dưa hành, củ kiệu giúp cân vị, tượng trưng cho sự hài hòa; canh măng, nem rán góp phần làm phong phú mâm cỗ ngày Tết. Mâm cơm Tết không chỉ là bữa ăn truyền thống mà còn là biểu tượng của tình cảm gia đình và sự đoàn viên.</p>
+        </div>
+    </div>
+    <div id="banh-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('mon-an-modal')">&times;</span>
+            <h2>Ý Nghĩa Các Món Ăn Ngày Tết</h2>
+            <img src="https://vhntbacgiang.edu.vn/wp-content/uploads/2019/06/bc2.jpg" alt="Thức Ăn Tết" style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
+            <p>Bánh chưng – bánh tét là những món bánh truyền thống không thể thiếu trong ngày Tết Nguyên đán của dân tộc Việt Nam, tượng trưng cho lòng biết ơn tổ tiên và ước mong cuộc sống no đủ, ấm no. Bánh chưng hình vuông biểu trưng cho đất, bánh tét dạng trụ dài gắn liền với văn hóa các vùng miền, thể hiện sự sung túc, tròn đầy. Việc gói và dâng bánh trong ngày Tết góp phần gìn giữ truyền thống tốt đẹp, thắt chặt tình cảm gia đình và cầu mong một năm mới an lành, hạnh phúc.</p>
+        </div>
+    </div>
+
+    <!-- Modal for Bàn Thờ Bác Hồ -->
+    <div id="bac-ho-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('bac-ho-modal')">&times;</span>
+            <h2>Ý Nghĩa Bàn Thờ Chủ Tịch Hồ Chí Minh</h2>
+            <img src="https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/469755612_1550389235661542_2156117265039078579_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFlKAeMWvnT_YhIlpS8L4XuxOamReG8677E5qZF4bzrvpccy6zFNfwnEnBhth_m1c6aeFtmG-3FdDJEUTGIF0Cz&_nc_ohc=Hh-MYeeaQDQQ7kNvwEwWZaC&_nc_oc=AdlzOptncIloXwDD5qy8GNP9zsjUqiW9xKPYt94Ky7jV8sIx7YUvhRIneEwXZjV7ECxmaswK2_WQYMy57_00eEUS&_nc_zt=23&_nc_ht=scontent.fdad1-1.fna&_nc_gid=Sft1hcQKiZ5V91UUPbHdAQ&oh=00_AftdA1djAmOudtDImUvv5VhhK0O-vhgXQHaPQ_XTRSOwXw&oe=699117A3" alt="Bàn Thờ Bác Hồ" style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
+            <p>Bàn thờ Chủ tịch Hồ Chí Minh trong Quân đội nhân dân Việt Nam có ý nghĩa chính trị, tư tưởng và tinh thần đặc biệt sâu sắc, thể hiện lòng tôn kính và biết ơn vô hạn của cán bộ, chiến sĩ đối với Chủ tịch Hồ Chí Minh – vị lãnh tụ thiên tài của Đảng và Nhân dân ta, người sáng lập, lãnh đạo và rèn luyện Quân đội nhân dân Việt Nam anh hùng. Việc lập và duy trì bàn thờ Bác Hồ tại các cơ quan, đơn vị quân đội là biểu hiện sinh động của truyền thống "uống nước nhớ nguồn", đồng thời là hình thức giáo dục chính trị, tư tưởng trực quan, góp phần nâng cao bản lĩnh chính trị, phẩm chất đạo đức và ý thức trách nhiệm cho bộ đội trong quá trình thực hiện nhiệm vụ.</p>
+            <p>Trước anh linh Chủ tịch Hồ Chí Minh, mỗi cán bộ, chiến sĩ luôn tự soi, tự sửa, nhắc nhở bản thân tuyệt đối trung thành với Đảng, với Tổ quốc và Nhân dân; kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội; chấp hành nghiêm kỷ luật quân đội, pháp luật Nhà nước; không ngừng tu dưỡng, rèn luyện, phấn đấu hoàn thành tốt mọi nhiệm vụ được giao. Bàn thờ Bác Hồ là nơi thể hiện sự kết nối bền chặt giữa truyền thống vẻ vang của Quân đội với nhiệm vụ xây dựng và bảo vệ Tổ quốc trong giai đoạn hiện nay; là không gian linh thiêng để tổ chức các hoạt động sinh hoạt chính trị, lễ báo công, tuyên thệ, qua đó giáo dục, cổ vũ, động viên cán bộ, chiến sĩ phát huy tinh thần đoàn kết, ý chí quyết tâm và lòng tự hào của người quân nhân cách mạng.</p>
+            <p>Trong đời sống sinh hoạt, học tập và công tác hằng ngày, hình ảnh Chủ tịch Hồ Chí Minh trên bàn thờ luôn là điểm tựa tinh thần vững chắc, nhắc nhở cán bộ, chiến sĩ tích cực học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh; giữ gìn lối sống trong sạch, giản dị, khiêm tốn; đề cao tinh thần trách nhiệm, ý thức tổ chức kỷ luật, tác phong công tác khoa học, chính quy. Qua đó, góp phần xây dựng môi trường văn hóa quân sự lành mạnh, củng cố niềm tin, ý chí và sức mạnh tinh thần của đơn vị.</p>
+            <p>Có thể khẳng định, bàn thờ Chủ tịch Hồ Chí Minh trong Quân đội nhân dân Việt Nam không chỉ mang giá trị tâm linh mà còn là biểu tượng thiêng liêng của niềm tin chính trị, là nguồn động viên tinh thần to lớn, góp phần xây dựng Quân đội nhân dân Việt Nam cách mạng, chính quy, tinh nhuệ, từng bước hiện đại, xứng đáng là lực lượng chính trị, lực lượng chiến đấu trung thành, tin cậy của Đảng, Nhà nước và Nhân dân.</p>
+        </div>
+    </div>
 </body>
 </html>
