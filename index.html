@@ -32,13 +32,12 @@
             font-family: 'Roboto', sans-serif;
             background-color: var(--cream);
             color: var(--text-dark);
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Pattern nhẹ */
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
             padding-top: var(--nav-height-pc);
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Ruy băng và hoa mai rơi */
         .falling-elements {
             position: fixed;
             top: 0;
@@ -66,30 +65,77 @@
             animation: fall 15s linear infinite;
         }
 
+        .red-flower {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle, #ff1493 50%, #ff69b4 100%);
+            border-radius: 50%;
+            animation: fall 12s linear infinite;
+        }
+
+        .yellow-flower {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background: radial-gradient(circle, #ffd700 50%, #ffed4e 100%);
+            border-radius: 50%;
+            animation: fall 14s linear infinite;
+        }
+
+        .banh-chung {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #d4a574 0%, #8b6f47 100%);
+            border-radius: 2px;
+            animation: fall 16s linear infinite;
+            box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+        }
+
+        .li-xi {
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: linear-gradient(90deg, #ff1493 0%, #ffb6de 50%, #ff1493 100%);
+            border-radius: 4px;
+            animation: fall 13s linear infinite;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .lantern {
+            position: absolute;
+            width: 22px;
+            height: 26px;
+            background: radial-gradient(ellipse at 50% 30%, #ffed4e, #ffd700);
+            border-radius: 50%;
+            animation: fall 18s linear infinite;
+            box-shadow: inset 0 2px 6px rgba(255,255,255,0.4);
+        }
+
         @keyframes fall {
             0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- THANH BAR CHỨC NĂNG (Sticky Header) --- */
         .sticky-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(255, 248, 225, 0.95));
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
             z-index: 1000;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 0 20px;
             height: var(--nav-height-pc);
-            border-bottom: 3px solid var(--primary-red);
-            overflow: hidden; /* Để pháo hoa không tràn */
+            border-bottom: 4px solid var(--primary-red);
+            overflow: visible;
+            gap: 20px;
         }
 
-        /* Pháo hoa animation */
         .fireworks {
             position: absolute;
             top: 0;
@@ -119,38 +165,96 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            position: absolute;
+            left: 20px;
+            flex-shrink: 0;
         }
 
-        /* CSS cho cờ dạng tròn để tự thêm ảnh */
         .circular-flag {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: #eee; /* Màu nền chờ ảnh */
+            background-color: #eee;
             border: 2px solid var(--gold);
             background-size: cover;
             background-position: center;
-            background-image: url();
-            /* Gợi ý: Thêm ảnh bằng background-image trong HTML hoặc tại đây */
-            /* ví dụ: background-image: url('path/to/your/image.png'); */
         }
 
         .countdown-mini {
-            background: var(--primary-red);
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.08), rgba(255, 215, 0, 0.06));
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.1), inset 0 1px 2px rgba(255,255,255,0.5);
+            order: 0;
+            flex-shrink: 0;
+        }
+        
+        .countdown-item {
+            background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 100%);
             color: var(--gold);
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 8px 12px;
+            border-radius: 6px;
             font-weight: bold;
-            font-family: monospace;
-            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
             border: 2px solid var(--gold);
-            min-width: 180px;
+            min-width: 55px;
             text-align: center;
+            position: relative;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25), inset 0 -2px 4px rgba(0,0,0,0.2);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .countdown-item .number {
+            display: inline-block;
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease;
+            transform-origin: center center;
+            transform-style: preserve-3d;
+        }
+        
+        .countdown-item .number.flip {
+            transform: rotateX(90deg) scaleY(0.8);
+            opacity: 0;
+        }
+        
+        .countdown-item .label {
+            font-size: 0.6rem;
+            position: absolute;
+            bottom: 3px;
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .countdown-separator {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.3rem;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .nav-menu {
             display: flex;
             gap: 5px;
+            position: absolute;
+            right: 20px;
+            flex-shrink: 0;
         }
 
         .nav-link {
@@ -169,7 +273,6 @@
             color: var(--white);
         }
 
-        /* --- HEADER CHÍNH --- */
         header {
             text-align: center;
             padding: 30px 15px;
@@ -213,15 +316,8 @@
             height: auto;
             object-fit: cover;
             display: block;
-            background: #ffebee; /* Màu nền chờ ảnh */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-red);
-            font-weight: bold;
         }
 
-        /* --- PHẦN NỘI DUNG CHUNG --- */
         section {
             max-width: 800px;
             margin: 40px auto;
@@ -249,7 +345,6 @@
             margin: 5px auto 0;
         }
 
-        /* --- 1. ĐẾM NGƯỢC --- */
         .countdown-section {
             text-align: center;
         }
@@ -266,9 +361,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border: 2px solid var(--gold);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            background-image: url('https://via.placeholder.com/200x50/ffd700/000000?text=Ngua+Vang'), linear-gradient(rgba(211,47,47,0.9), rgba(211,47,47,0.9));
-            background-size: cover, cover;
-            background-blend-mode: overlay;
             position: relative;
         }
 
@@ -418,7 +510,6 @@
             margin-left: 5px;
         }
 
-        /* --- BOX LỜI CHÚC --- */
         .wishes-box {
             background: #aa0000;
             border: 2px solid var(--gold);
@@ -441,9 +532,10 @@
             justify-content: center;
             text-align: center;
             font-weight: 600;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(255,255,0,0.5);
             -webkit-text-stroke: 1px rgba(211,47,47,0.5);
+            letter-spacing: 0.05em;
         }
 
         .btn-change-wish {
@@ -470,7 +562,6 @@
             background: var(--dark-red);
         }
 
-        /* --- 2. THƯ CHÚC TẾT --- */
         .letter-container {
             background: #fff;
             padding: 30px;
@@ -487,11 +578,6 @@
             object-fit: cover;
             margin-bottom: 20px;
             border-radius: 4px;
-            background: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
         }
 
         .letter-content {
@@ -509,33 +595,61 @@
             color: var(--text-dark);
         }
 
-        /* --- 3. Ý NGHĨA XUÂN & NHIỆM VỤ --- */
         .content-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--primary-red);
-            height: 350px;
-            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #fffaf0 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(211, 47, 47, 0.12), 0 2px 8px rgba(0,0,0,0.08);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-top: 5px solid var(--primary-red);
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
         }
 
         .content-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(211, 47, 47, 0.18), 0 4px 12px rgba(0,0,0,0.12);
+            border-color: rgba(255, 215, 0, 0.4);
         }
-
-        .content-card p {
+        
+        .content-card:hover::before {
+            left: 100%;
+        }
+        
+        .content-card img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 5px;
             margin-bottom: 15px;
-            line-height: 1.6;
+        }
+        
+        .content-card p {
             text-align: justify;
+            line-height: 1.6;
+            color: var(--text-dark);
         }
 
         .meaning-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr;
             gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .meaning-grid .content-card {
@@ -572,7 +686,6 @@
             margin-top: 50px;
         }
 
-        /* --- MODAL POPUP --- */
         .modal {
             display: none;
             position: fixed;
@@ -601,13 +714,26 @@
             overflow-y: auto;
         }
 
-        /* Slideshow */
         .slideshow-container {
             position: relative;
             margin: auto;
             overflow: hidden;
             width: 100%;
-            height: 400px; /* Adjust based on content */
+            height: 350px;
+            border-radius: 10px;
+            touch-action: pan-y;
+        }
+        
+        .slideshow-container.inline {
+            margin: 15px 0;
+            height: 500px;
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.15), inset 0 0 0 1px rgba(255, 215, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 248, 225, 0.95) 100%);
+            border-radius: 15px;
+            position: relative;
+            user-select: none;
+            cursor: grab;
+            transition: all 0.2s ease;
         }
 
         .slide {
@@ -636,15 +762,38 @@
 
         .slide img {
             width: 100%;
-            height: 250px;
+            height: 320px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 12px;
+            image-rendering: crisp-edges;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin: 0 auto;
         }
 
         .slide-text {
             text-align: center;
-            margin-top: 10px;
-            padding: 0 10px;
+            margin-top: 12px;
+            padding: 0 15px 10px 15px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,248,225,0.5));
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .slide-text h4 {
+            font-size: 1.35rem !important;
+            margin: 8px 0 6px 0 !important;
+            font-weight: 700 !important;
+            color: var(--primary-red) !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
+        }
+        
+        .slide-text p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 0;
+            color: var(--text-dark);
+            font-weight: 500;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
         }
 
         .prev, .next {
@@ -652,24 +801,39 @@
             position: absolute;
             top: 50%;
             width: auto;
-            margin-top: -22px;
-            padding: 16px;
+            margin-top: -25px;
+            padding: 14px 20px;
             color: white;
             font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
             user-select: none;
-            background-color: rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.7), rgba(179, 28, 28, 0.7));
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10;
         }
 
         .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
+            right: 15px;
+        }
+        
+        .prev {
+            left: 15px;
         }
 
         .prev:hover, .next:hover {
-            background-color: rgba(0,0,0,0.8);
+            background: linear-gradient(135deg, var(--primary-red), #c62828);
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(211, 47, 47, 0.4);
+        }
+        
+        .prev:active, .next:active {
+            transform: scale(0.95);
         }
 
         .dots {
@@ -679,17 +843,27 @@
 
         .dot {
             cursor: pointer;
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #ccc;
             border-radius: 50%;
             display: inline-block;
-            transition: background-color 0.6s ease;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .dot:hover {
+            background-color: #FFB6C1;
+            transform: scale(1.15);
         }
 
-        .active, .dot:hover {
+        .dot.active {
             background-color: var(--primary-red);
+            border-color: var(--gold);
+            transform: scale(1.25);
+            box-shadow: 0 3px 8px rgba(211, 47, 47, 0.3);
         }
 
         .close {
@@ -703,6 +877,7 @@
         .close:hover {
             color: var(--primary-red);
         }
+
         @media (max-width: 768px) {
             body {
                 padding-top: var(--nav-height-mobile);
@@ -711,31 +886,50 @@
             .sticky-bar {
                 flex-direction: column;
                 height: auto;
-                padding: 10px;
+                padding: 12px;
+                gap: 12px;
+                justify-content: center;
+                position: fixed;
             }
 
             .bar-left {
-                width: 100%;
-                justify-content: space-between;
-                margin-bottom: 10px;
+                width: auto;
+                position: static;
+                justify-content: center;
+                margin-bottom: 0;
+                order: 2;
+            }
+            
+            .countdown-mini {
+                gap: 4px;
+                padding: 6px 12px;
+                order: 1;
+                margin-bottom: 0;
+            }
+            
+            .countdown-item {
+                padding: 4px 8px;
+                font-size: 0.85rem;
+                min-width: 42px;
+                height: 35px;
+            }
+            
+            .countdown-separator {
+                font-size: 0.9rem;
             }
             
             .nav-menu {
                 width: 100%;
+                position: static;
                 overflow-x: auto;
-                padding-bottom: 5px;
-                /* Ẩn thanh cuộn nhưng vẫn scroll được */
+                padding-bottom: 8px;
                 scrollbar-width: none; 
                 -ms-overflow-style: none;
+                justify-content: center;
+                order: 3;
             }
             .nav-menu::-webkit-scrollbar { 
                 display: none; 
-            }
-
-            .countdown-mini {
-                font-size: 0.9rem;
-                padding: 4px 10px;
-                min-width: 140px;
             }
 
             .big-clock {
@@ -745,6 +939,15 @@
             .time-box {
                 width: 60px;
                 height: 60px;
+            }
+            
+            .time-box[style*="width: 140px"] {
+                width: 110px !important;
+                height: 110px !important;
+            }
+            
+            .time-box[style*="width: 140px"] .time-val {
+                font-size: 2.5rem !important;
             }
 
             .time-val {
@@ -759,7 +962,6 @@
                 font-size: 1.3rem;
             }
 
-            /* Modal responsive */
             .modal-content {
                 width: 90%;
                 padding: 20px;
@@ -767,11 +969,17 @@
             }
 
             .slideshow-container {
-                height: 350px;
+                height: 380px;
+            }
+            
+            .slideshow-container.inline {
+                height: 480px;
+                cursor: auto;
+                touch-action: manipulation;
             }
 
             .slide img {
-                height: 200px;
+                height: 260px;
             }
 
             .slide-text h3 {
@@ -803,44 +1011,129 @@
             .meaning-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
+                max-width: 100%;
+            }
+            
+            .prev, .next {
+                padding: 12px 16px;
+                font-size: 20px;
+                margin-top: -20px;
             }
         }
     </style>
 </head>
-    <body>
-        <div class="falling-elements">
-            <!-- Ruy băng -->
-            <div class="ribbon" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="ribbon" style="left: 30%; animation-delay: 2s;"></div>
-            <div class="ribbon" style="left: 50%; animation-delay: 4s;"></div>
-            <div class="ribbon" style="left: 70%; animation-delay: 6s;"></div>
-            <div class="ribbon" style="left: 90%; animation-delay: 8s;"></div>
-            <!-- Hoa mai hồng -->
-            <div class="pink-flower" style="left: 20%; animation-delay: 1s;"></div>
-            <div class="pink-flower" style="left: 40%; animation-delay: 3s;"></div>
-            <div class="pink-flower" style="left: 60%; animation-delay: 5s;"></div>
-            <div class="pink-flower" style="left: 80%; animation-delay: 7s;"></div>
-        </div>    <nav class="sticky-bar">
+<body>
+    <div class="falling-elements">
+        <div class="ribbon" style="left: 5%; animation-delay: 0s;"></div>
+        <div class="ribbon" style="left: 15%; animation-delay: 1.5s;"></div>
+        <div class="ribbon" style="left: 25%; animation-delay: 2s;"></div>
+        <div class="ribbon" style="left: 35%; animation-delay: 3.5s;"></div>
+        <div class="ribbon" style="left: 45%; animation-delay: 4s;"></div>
+        <div class="ribbon" style="left: 55%; animation-delay: 5.5s;"></div>
+        <div class="ribbon" style="left: 65%; animation-delay: 6s;"></div>
+        <div class="ribbon" style="left: 75%; animation-delay: 7.5s;"></div>
+        <div class="ribbon" style="left: 85%; animation-delay: 8s;"></div>
+        <div class="ribbon" style="left: 95%; animation-delay: 9.5s;"></div>
+        
+        <div class="pink-flower" style="left: 8%; animation-delay: 0.5s;"></div>
+        <div class="pink-flower" style="left: 18%; animation-delay: 1s;"></div>
+        <div class="pink-flower" style="left: 28%; animation-delay: 2.5s;"></div>
+        <div class="pink-flower" style="left: 38%; animation-delay: 3s;"></div>
+        <div class="pink-flower" style="left: 48%; animation-delay: 4.5s;"></div>
+        <div class="pink-flower" style="left: 58%; animation-delay: 5s;"></div>
+        <div class="pink-flower" style="left: 68%; animation-delay: 6.5s;"></div>
+        <div class="pink-flower" style="left: 78%; animation-delay: 7s;"></div>
+        <div class="pink-flower" style="left: 88%; animation-delay: 8.5s;"></div>
+        <div class="pink-flower" style="left: 98%; animation-delay: 9s;"></div>
+        
+        <div class="red-flower" style="left: 12%; animation-delay: 1.2s;"></div>
+        <div class="red-flower" style="left: 22%; animation-delay: 2.2s;"></div>
+        <div class="red-flower" style="left: 32%; animation-delay: 3.2s;"></div>
+        <div class="red-flower" style="left: 42%; animation-delay: 4.2s;"></div>
+        <div class="red-flower" style="left: 52%; animation-delay: 5.2s;"></div>
+        <div class="red-flower" style="left: 62%; animation-delay: 6.2s;"></div>
+        <div class="red-flower" style="left: 72%; animation-delay: 7.2s;"></div>
+        <div class="red-flower" style="left: 82%; animation-delay: 8.2s;"></div>
+        <div class="red-flower" style="left: 92%; animation-delay: 9.2s;"></div>
+        
+        <div class="yellow-flower" style="left: 2%; animation-delay: 0.8s;"></div>
+        <div class="yellow-flower" style="left: 20%; animation-delay: 1.8s;"></div>
+        <div class="yellow-flower" style="left: 40%; animation-delay: 3.8s;"></div>
+        <div class="yellow-flower" style="left: 60%; animation-delay: 5.8s;"></div>
+        <div class="yellow-flower" style="left: 80%; animation-delay: 7.8s;"></div>
+        
+        <div class="banh-chung" style="left: 10%; animation-delay: 1.1s;"></div>
+        <div class="banh-chung" style="left: 30%; animation-delay: 2.8s;"></div>
+        <div class="banh-chung" style="left: 50%; animation-delay: 4.8s;"></div>
+        <div class="banh-chung" style="left: 70%; animation-delay: 6.8s;"></div>
+        <div class="banh-chung" style="left: 90%; animation-delay: 8.8s;"></div>
+        
+        <div class="li-xi" style="left: 6%; animation-delay: 0.3s;"></div>
+        <div class="li-xi" style="left: 16%; animation-delay: 1.3s;"></div>
+        <div class="li-xi" style="left: 26%; animation-delay: 2.3s;"></div>
+        <div class="li-xi" style="left: 36%; animation-delay: 3.3s;"></div>
+        <div class="li-xi" style="left: 46%; animation-delay: 4.3s;"></div>
+        <div class="li-xi" style="left: 56%; animation-delay: 5.3s;"></div>
+        <div class="li-xi" style="left: 66%; animation-delay: 6.3s;"></div>
+        <div class="li-xi" style="left: 76%; animation-delay: 7.3s;"></div>
+        <div class="li-xi" style="left: 86%; animation-delay: 8.3s;"></div>
+        <div class="li-xi" style="left: 96%; animation-delay: 9.3s;"></div>
+        
+        <div class="lantern" style="left: 14%; animation-delay: 0.7s;"></div>
+        <div class="lantern" style="left: 34%; animation-delay: 2.7s;"></div>
+        <div class="lantern" style="left: 54%; animation-delay: 4.7s;"></div>
+        <div class="lantern" style="left: 74%; animation-delay: 6.7s;"></div>
+        <div class="lantern" style="left: 94%; animation-delay: 8.7s;"></div>
+    </div>
+
+    <nav class="sticky-bar">
         <div class="fireworks">
-            <div class="firework" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="firework" style="left: 20%; animation-delay: 0.5s;"></div>
-            <div class="firework" style="left: 30%; animation-delay: 1s;"></div>
-            <div class="firework" style="left: 40%; animation-delay: 1.5s;"></div>
-            <div class="firework" style="left: 50%; animation-delay: 2s;"></div>
-            <div class="firework" style="left: 60%; animation-delay: 2.5s;"></div>
-            <div class="firework" style="left: 70%; animation-delay: 3s;"></div>
-            <div class="firework" style="left: 80%; animation-delay: 3.5s;"></div>
-            <div class="firework" style="left: 90%; animation-delay: 4s;"></div>
+            <div class="firework" style="left: 5%; animation-delay: 0s;"></div>
+            <div class="firework" style="left: 10%; animation-delay: 0.3s;"></div>
+            <div class="firework" style="left: 15%; animation-delay: 0.6s;"></div>
+            <div class="firework" style="left: 20%; animation-delay: 0.9s;"></div>
+            <div class="firework" style="left: 25%; animation-delay: 1.2s;"></div>
+            <div class="firework" style="left: 30%; animation-delay: 1.5s;"></div>
+            <div class="firework" style="left: 35%; animation-delay: 1.8s;"></div>
+            <div class="firework" style="left: 40%; animation-delay: 2.1s;"></div>
+            <div class="firework" style="left: 45%; animation-delay: 2.4s;"></div>
+            <div class="firework" style="left: 50%; animation-delay: 2.7s;"></div>
+            <div class="firework" style="left: 55%; animation-delay: 3s;"></div>
+            <div class="firework" style="left: 60%; animation-delay: 3.3s;"></div>
+            <div class="firework" style="left: 65%; animation-delay: 3.6s;"></div>
+            <div class="firework" style="left: 70%; animation-delay: 3.9s;"></div>
+            <div class="firework" style="left: 75%; animation-delay: 4.2s;"></div>
+            <div class="firework" style="left: 80%; animation-delay: 4.5s;"></div>
+            <div class="firework" style="left: 85%; animation-delay: 4.8s;"></div>
+            <div class="firework" style="left: 90%; animation-delay: 5.1s;"></div>
+            <div class="firework" style="left: 95%; animation-delay: 5.4s;"></div>
         </div>
         <div class="bar-left">
             <div style="display: flex; gap:10px; align-items: center;">
-                
-                <!-- Để thêm ảnh, hãy dùng style: style="background-image: url('link-anh-co-dang.png')" -->
                 <div class="circular-flag" title="Cờ Đảng" style="background-image: url('https://xdcs.cdnchinhphu.vn/446259493575335936/2023/3/10/dangky-1678414634214362948075.jpg')"></div>
-                <!-- Để thêm ảnh, hãy dùng style: style="background-image: url('link-anh-co-to-quoc.png')" -->
                 <div class="circular-flag" title="Cờ Tổ Quốc" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1280px-Flag_of_Vietnam.svg.png')"></div>
             </div>
-            <div class="countdown-mini" id="mini-timer">00:00:00:00</div>
+        </div>
+        <div class="countdown-mini" id="mini-timer">
+            <div class="countdown-item">
+                <span class="number" id="mini-days">00</span>
+                <span class="label">Ngày</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+                <span class="number" id="mini-hours">00</span>
+                <span class="label">Giờ</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+                <span class="number" id="mini-minutes">00</span>
+                <span class="label">Phút</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+                <span class="number" id="mini-seconds">00</span>
+                <span class="label">Giây</span>
+            </div>
         </div>
         <div class="nav-menu">
             <a href="#countdown" class="nav-link">Đếm ngược</a>
@@ -853,7 +1146,6 @@
         <div class="unit-name">
             <h1>TRƯỜNG QUÂN SỰ QUÂN KHU 5</h1>
             PHÒNG HẬU CẦN – KỸ THUẬT<br>
-            
         </div>
         <h1 class="slogan">MỪNG ĐẢNG – MỪNG XUÂN</h1>
         <p class="sub-slogan">Xuân mới – Khí thế mới – Quyết tâm mới<br>Hoàn thành xuất sắc mọi nhiệm vụ</p>
@@ -876,7 +1168,6 @@
                 </div>
             </div>
             
-            <!-- Ngựa vàng -->
             <img class="horse-svg" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFg_ooggeq0gLg5MkyUR22z2-bRhqGH3Z1264uHkfV3AyEuNfcKUs4pTqP0drCV9Mmx_hHwTRgweEoxvFK-0BZldYbStwaeE65k2-V_D2YsC_7IEGzy7Iyh6I6UOJvfmDkxO_dAV4Nkano3JvPP1dcUBnrc8PeXwhLUhr9vviCFQCBNOyvERylMttuD8M/s350-rw/(%20Anhpng.com%20)%20-%20B%E1%BB%98%20S%E1%BB%90%202026%20(32).png" alt="Ngựa Vàng Tết Nguyên Đán" style="width:200px; height:150px; display:block; margin:10px auto; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.2);">
             
             <div class="date-info">
@@ -884,11 +1175,14 @@
                 <span>Tết Nguyên Đán: Thứ Ba, 17 tháng 2, 2026</span>
             </div>
 
-            <div class="big-clock">
-                <div class="time-box">
-                    <span class="time-val" id="days">00</span>
-                    <span class="time-label">Ngày</span>
+            <div style="margin-bottom: 30px; display: flex; justify-content: center;">
+                <div class="time-box" style="width: 140px; height: 140px; margin-bottom: 0; border-radius: 20px; box-shadow: 0 8px 20px rgba(211, 47, 47, 0.25), inset 0 -4px 8px rgba(0,0,0,0.15);">
+                    <span class="time-val" id="days" style="font-size: 3.5rem;">00</span>
+                    <span class="time-label" style="font-size: 0.9rem; margin-top: 8px;">Ngày</span>
                 </div>
+            </div>
+
+            <div class="big-clock">
                 <div class="time-box">
                     <span class="time-val" id="hours">00</span>
                     <span class="time-label">Giờ</span>
@@ -903,14 +1197,10 @@
                 </div>
             </div>
 
-            <div class="lunar-date" id="lunar-today">
-                Đang tải lịch âm...
-            </div>
+            <div class="lunar-date" id="lunar-today">Đang tải lịch âm...</div>
 
             <div class="wishes-box">
-                <div class="wish-content" id="wish-display">
-                    Chúc mừng năm mới - Vạn sự như ý
-                </div>
+                <div class="wish-content" id="wish-display">Chúc mừng năm mới - Vạn sự như ý</div>
                 <button class="btn-change-wish" onclick="randomWish()">↻</button>
             </div>
         </section>
@@ -922,67 +1212,120 @@
                     <img src="anh1.jpg" alt="Ảnh chúc tết" style="width:100%; height:100%; object-fit:cover;">
                 </div>
                 <div class="letter-content">
-                    <p>“Nhân dịp Tết Nguyên đán Xuân Bính Ngọ 2026, Đảng uỷ, Chỉ huy Phòng Hậu cần – Kỹ thuật trân trọng gửi tới toàn thể cán bộ, nhân viên, chiến sĩ trong Phòng cùng gia đình lời chúc mừng năm mới sức khỏe, hạnh phúc và thắng lợi mới.</p>
+                    <p>"Nhân dịp Tết Nguyên đán Xuân Bính Ngọ 2026, Đảng uỷ, Chỉ huy Phòng Hậu cần – Kỹ thuật trân trọng gửi tới toàn thể cán bộ, nhân viên, chiến sĩ trong Phòng cùng gia đình lời chúc mừng năm mới sức khỏe, hạnh phúc và thắng lợi mới.</p>
                     <br>
                     <p>Phát huy truyền thống đoàn kết, chủ động, sáng tạo và tinh thần trách nhiệm cao, Đảng uỷ, Chỉ huy Phòng tin tưởng rằng mỗi cán bộ, nhân viên, chiến sĩ sẽ tiếp tục nỗ lực phấn đấu, khắc phục khó khăn, hoàn thành xuất sắc mọi nhiệm vụ được giao, góp phần bảo đảm tốt công tác hậu cần – kỹ thuật, xây dựng đơn vị vững mạnh toàn diện, đáp ứng yêu cầu nhiệm vụ của Nhà trường trong tình hình mới.</p>
                     <br>
                     <p>Kính chúc các đồng chí và gia đình một năm mới an khang, thịnh vượng, đoàn kết, tiến bộ và thành công."</p>
                 </div>
-                <div class="letter-signature">
-                    ĐẢNG UỶ – CHỈ HUY <br>
-PHÒNG HẬU CẦN – KỸ THUẬT
-                </div>
+                <div class="letter-signature">ĐẢNG UỶ – CHỈ HUY<br>PHÒNG HẬU CẦN – KỸ THUẬT</div>
             </div>
         </section>
 
         <section id="meaning">
             <h2 class="section-title">Ý Nghĩa Xuân</h2>
             <div class="meaning-grid">
-                <div class="content-card" onclick="openModal('bac-ho-modal')" style="cursor: pointer;">
-                    <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2020/1/22/780102/Bac-Ho-1-01.jpg" alt="Bàn Thờ Bác Hồ" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Bàn Thờ Chủ Tịch Hồ Chí Minh</h3>
-                    <p>Bàn thờ Chủ tịch Hồ Chí Minh trong Quân đội nhân dân Việt Nam có ý nghĩa chính trị, tư tưởng và tinh thần đặc biệt sâu sắc, thể hiện lòng tôn kính và biết ơn vô hạn của cán bộ, chiến sĩ đối với Chủ tịch Hồ Chí Minh – vị lãnh tụ thiên tài của Đảng và Nhân dân ta... (Click để xem thêm)</p>
+                <div class="content-card">
+                    <img src="https://media-cdn-v2.laodong.vn/storage/newsportal/2020/1/22/780102/Bac-Ho-1-01.jpg" alt="Bàn Thờ Bác Hồ" style="object-fit:cover;">
+                    <h3 style="color: var(--primary-red); margin-bottom: 15px;">Ý Nghĩa Bàn Thờ Chủ Tịch Hồ Chí Minh</h3>
+                    <p>Bàn thờ Chủ tịch Hồ Chí Minh trong Quân đội nhân dân Việt Nam có ý nghĩa chính trị, tư tưởng và tinh thần đặc biệt sâu sắc, thể hiện lòng tôn kính và biết ơn vô hạn của cán bộ, chiến sĩ. Việc lập bàn thờ Bác Hồ là biểu hiện của truyền thống "uống nước nhớ nguồn", thể hiện lòng hiếu kính và sự trung thành.</p>
+                    <p style="margin-top: 10px;">Trước anh linh Chủ tịch Hồ Chí Minh, mỗi cán bộ, chiến sĩ luôn tự soi, tự sửa, nhắc nhở bản thân tuyệt đối trung thành với Đảng, Tổ quốc và Nhân dân.</p>
+                    <p style="margin-top: 10px;">Bàn thờ Bác Hồ là không gian linh thiêng để tổ chức các hoạt động sinh hoạt chính trị, lễ báo công, giáo dục, cổ vũ cán bộ, chiến sĩ phát huy tinh thần đoàn kết và ý chí quyết tâm.</p>
                 </div>
-                <div class="content-card" onclick="openModal('hoa-modal')">
-                    <img src="https://cdn.tgdd.vn/Files/2021/12/03/1402134/tong-hop-10-loai-hoa-trang-tri-tet-dep-va-y-nghia-cua-tung-loai-202112031629132188.jpg" alt="Hoa Tết" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Hoa Đào</h3>
-                    <p>Hoa đào là biểu tượng đặc trưng của mùa xuân miền Bắc, tượng trưng cho sự sinh sôi, đổi mới và may mắn... (Click để xem thêm)</p>
-                </div>
-                <div class="content-card" onclick="openModal('ngu-qua-modal')">
-                    <img src="https://upload.wikimedia.org/wikipedia/vi/3/3d/M%C4%83m_ng%C5%A9_qu%E1%BA%A3_T%E1%BA%BFt.png" alt="Mâm Ngũ Quả" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Mâm Ngũ Quả</h3>
-                    <p>Mâm ngũ quả là nét đẹp văn hóa truyền thống không thể thiếu trong ngày Tết Nguyên đán của người Việt Nam, thể hiện đạo lý “uống nước nhớ nguồn”... (Click để xem thêm)</p>
-                </div>
-                <div class="content-card" onclick="openModal('mon-an-modal')">
-                    <img src="https://shop.annam-gourmet.com/pub/media/magefan_blog/m_n_n_ng_y_t_t.png" alt="Thức Ăn Tết" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Ý Nghĩa Các Món Ăn Ngày Tết</h3>
-                    <p>Các món ăn ngày Tết của người Việt mang đậm bản sắc truyền thống, thể hiện ước mong no đủ, sum vầy và may mắn trong năm mới. Tiêu biểu có bánh chưng, bánh tét tượng trưng cho đất trời và lòng biết ơn tổ tiên; thịt kho, thịt đông thể hiện sự sung túc; giò chả mang ý nghĩa tròn đầy, gắn kết; dưa hành, củ kiệu giúp cân vị, tượng trưng cho sự hài hòa; canh măng, nem rán góp phần làm phong phú mâm cỗ ngày Tết. Mâm cơm Tết không chỉ là bữa ăn truyền thống mà còn là biểu tượng của tình cảm gia đình và sự đoàn viên.</p>
-                </div>
-                 <div class="content-card" onclick="openModal('banh-modal')">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzA3tyw71mgcrrshZVsE9GmhmtumvoAuY5Fg&s" alt="Thức Ăn Tết" style="width:100%; height:150px; object-fit:cover; border-radius:5px; margin-bottom:10px;">
-                    <h3>Bánh Chưng- Bánh Tét</h3>
-                    <p>Bánh chưng – bánh tét là những món bánh truyền thống không thể thiếu trong ngày Tết Nguyên đán của dân tộc Việt Nam, tượng trưng cho lòng biết ơn tổ tiên và ước mong cuộc sống no đủ, ấm no. Bánh chưng hình vuông biểu trưng cho đất, bánh tét dạng trụ dài gắn liền với văn hóa các vùng miền, thể hiện sự sung túc, tròn đầy. Việc gói và dâng bánh trong ngày Tết góp phần gìn giữ truyền thống tốt đẹp, thắt chặt tình cảm gia đình và cầu mong một năm mới an lành, hạnh phúc.</p>
-                </div>
-                
-            </div>
-        </section>
 
+                <div class="content-card">
+                    <h3 style="color: var(--primary-red); margin-bottom: 15px; margin-top: 0;">Ý Nghĩa Các Loài Hoa Tết</h3>
+                    <div class="slideshow-container inline">
+                        <div class="slide active">
+                            <img src="https://cdn.tgdd.vn/Files/2021/12/03/1402134/tong-hop-10-loai-hoa-trang-tri-tet-dep-va-y-nghia-cua-tung-loai-202112031629132188.jpg" alt="Hoa Đào" style="width:100%; height:250px; object-fit:cover; border-radius:10px;">
+                            <div class="slide-text">
+                                <h4 style="color: var(--primary-red); margin: 10px 0 5px 0;">Hoa Đào</h4>
+                                <p style="margin: 0;">Hoa đào là biểu tượng đặc trưng của mùa xuân miền Bắc, tượng trưng cho sự sinh sôi, đổi mới và may mắn. Sắc hồng thắm mang lại vượng khí, xua đuổi điều không may, đem đến bình an và hạnh phúc.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://cdn.tgdd.vn/Files/2020/01/15/1231572/cach-chon-va-trang-tri-cay-mai-dep-no-dung-ngay-tr-2.jpg" alt="Hoa Mai" style="width:100%; height:250px; object-fit:cover; border-radius:10px;">
+                            <div class="slide-text">
+                                <h4 style="color: var(--primary-red); margin: 10px 0 5px 0;">Hoa Mai</h4>
+                                <p style="margin: 0;">Hoa mai gắn liền với Tết cổ truyền của người dân miền Nam, tượng trưng cho sự phú quý, thịnh vượng. Màu vàng rực rỡ thể hiện niềm vui, sự ấm no, sung túc và niềm tin vào tương lai.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://imgcdn.tapchicongthuong.vn/thumb/w_1000/tcct-media/21/3/7/hoa_ly_trang_1.jpg" alt="Hoa Ly" style="width:100%; height:250px; object-fit:cover; border-radius:10px;">
+                            <div class="slide-text">
+                                <h4 style="color: var(--primary-red); margin: 10px 0 5px 0;">Hoa Ly</h4>
+                                <p style="margin: 0;">Hoa ly mang vẻ đẹp thanh cao, tinh khiết, tượng trưng cho sự trang trọng, hòa hợp và đoàn viên. Hương thơm dịu nhẹ thể hiện ước mong về cuộc sống yên ấm, hạnh phúc.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQo6Bfrk2_M_jlC_vdIfwlTUc7457MsarPyQ&s" alt="Hoa Lay Ơn" style="width:100%; height:250px; object-fit:cover; border-radius:10px;">
+                            <div class="slide-text">
+                                <h4 style="color: var(--primary-red); margin: 10px 0 5px 0;">Hoa Lay Ơn</h4>
+                                <p style="margin: 0;">Hoa lay ơn với dáng vươn thẳng, mạnh mẽ, biểu trưng cho ý chí vươn lên. Thường được trưng trong dịp Tết với mong ước năm mới thuận lợi, thành đạt, gia đình sum vầy.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJv7R0eE5V6fS-484wv37rVExTTGvgNdSG3Q&s" alt="Hoa Cúc" style="width:100%; height:250px; object-fit:cover; border-radius:10px;">
+                            <div class="slide-text">
+                                <h4 style="color: var(--primary-red); margin: 10px 0 5px 0;">Hoa Cúc</h4>
+                                <p style="margin: 0;">Hoa cúc là loài hoa truyền thống gắn bó lâu đời với Tết Nguyên đán. Tượng trưng cho sự trường thọ, phúc lộc, hiếu nghĩa. Sắc vàng tươi mang ý nghĩa phú quý, thịnh vượng.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="https://images.baodantoc.vn/uploads/2024/Thang-12/Ngay-16/My-Thanh/8b975039f60a905759337df6743a8748hoa-van-tho-tet-29.jpg" alt="Hoa Vạn Thọ" style="width:100%; height:250px; object-fit:cover; border-radius:10px;">
+                            <div class="slide-text">
+                                <h4 style="color: var(--primary-red); margin: 10px 0 5px 0;">Hoa Vạn Thọ</h4>
+                                <p style="margin: 0;">Hoa vạn thọ là loài hoa quen thuộc trong ngày Tết, mang ý nghĩa trường thọ, sức khỏe, phúc lộc. Mang ước mong về cuộc sống lâu bền, gia đình bình an, con cháu hiếu thuận, sum vầy.</p>
+                            </div>
+                        </div>
+                        <a class="prev" onclick="changeSlideInline(-1)">&#10094;</a>
+                        <a class="next" onclick="changeSlideInline(1)">&#10095;</a>
+                    </div>
+                    <div class="dots" style="text-align: center; margin-top: 15px;">
+                        <span class="dot" onclick="currentSlideInline(1)"></span>
+                        <span class="dot" onclick="currentSlideInline(2)"></span>
+                        <span class="dot" onclick="currentSlideInline(3)"></span>
+                        <span class="dot" onclick="currentSlideInline(4)"></span>
+                        <span class="dot" onclick="currentSlideInline(5)"></span>
+                        <span class="dot" onclick="currentSlideInline(6)"></span>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/vi/3/3d/M%C4%83m_ng%C5%A9_qu%E1%BA%A3_T%E1%BA%BFt.png" alt="Mâm Ngũ Quả" style="object-fit:cover;">
+                    <h3 style="color: var(--primary-red); margin-bottom: 15px;">Ý Nghĩa Mâm Ngũ Quả</h3>
+                    <p>Mâm ngũ quả là nét đẹp văn hóa truyền thống không thể thiếu trong ngày Tết Nguyên đán, thể hiện đạo lý "uống nước nhớ nguồn", lòng hiếu kính đối với tổ tiên. "Ngũ quả" tượng trưng cho năm loại quả khác nhau, đại diện cho thuyết ngũ hành, hàm ý mong cầu sự hài hòa.</p>
+                    <p style="margin-top: 10px;">Mỗi loại quả được bày biện trên mâm đều mang một ý nghĩa riêng, gửi gắm ước mong về sức khỏe, tài lộc, may mắn trong năm mới. Tùy theo phong tục từng vùng miền, mâm ngũ quả có cách lựa chọn khác nhau.</p>
+                    <p style="margin-top: 10px;">Mâm ngũ quả là biểu tượng của sự đoàn viên, gắn kết gia đình, và phát huy những giá trị văn hóa truyền thống tốt đẹp của dân tộc Việt Nam.</p>
+                </div>
+
+                <div class="content-card">
+                    <img src="https://shop.annam-gourmet.com/pub/media/magefan_blog/m_n_n_ng_y_t_t.png" alt="Thức Ăn Tết" style="object-fit:cover;">
+                    <h3 style="color: var(--primary-red); margin-bottom: 15px;">Ý Nghĩa Các Món Ăn Ngày Tết</h3>
+                    <p>Các món ăn ngày Tết mang đậm bản sắc truyền thống, thể hiện ước mong no đủ, sum vầy và may mắn. Bánh chưng, bánh tét tượng trưng cho đất trời; thịt kho, thịt đông thể hiện sung túc; giò chả mang ý nghĩa tròn đầy; dưa hành, củ kiệu giúp cân vị.</p>
+                    <p style="margin-top: 10px;">Canh măng, nem rán góp phần làm phong phú mâm cỗ ngày Tết. Mâm cơm Tết không chỉ là bữa ăn truyền thống mà còn là biểu tượng của tình cảm gia đình và sự đoàn viên.</p>
+                </div>
+
+                <div class="content-card">
+                    <img src="https://vhntbacgiang.edu.vn/wp-content/uploads/2019/06/bc2.jpg" alt="Bánh Chưng - Bánh Tét" style="object-fit:cover;">
+                    <h3 style="color: var(--primary-red); margin-bottom: 15px;">Bánh Chưng - Bánh Tét</h3>
+                    <p>Bánh chưng – bánh tét là những món bánh truyền thống không thể thiếu trong ngày Tết Nguyên đán, tượng trưng cho lòng biết ơn tổ tiên. Bánh chưng hình vuông biểu trưng cho đất, bánh tét dạng trụ dài gắn liền với văn hóa các vùng miền.</p>
+                    <p style="margin-top: 10px;">Việc gói bánh trong ngày Tết góp phần gìn giữ truyền thống tốt đẹp, thắt chặt tình cảm gia đình. Bánh chưng thường hình thành từ năm nguyên liệu: gạo nếp, đỗ xanh, thịt lợn, sả và lá dong.</p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>© 2026 Phòng Hậu Cần - Kỹ Thuật | Trường Quân sự Quân khu 5</p>
+        <p>© 2026 Trường Quân sự Quân khu 5   |    Phòng Hậu Cần - Kỹ Thuật</p>
         <p>Chúc Mừng Năm Mới - Thắng Lợi Mới</p>
     </footer>
 
-    <!-- Nhạc Tết chạy dưới nền -->
     <audio id="tet-music" autoplay loop style="display: none;">
         <source src="nhac.mp3" type="audio/mpeg">
-        Trình duyệt của bạn không hỗ trợ audio.
     </audio>
 
     <script>
-        // 1. DỮ LIỆU LỜI CHÚC
         const wishes = [
             "An khang thịnh vượng - Vạn sự như ý",
             "Tân niên vạn phúc - Phú quý khang ninh",
@@ -990,27 +1333,12 @@ PHÒNG HẬU CẦN – KỸ THUẬT
             "Cung hỉ phát tài - Tấn tài tấn lộc",
             "Gia đạo bình an - Phúc lộc miên man",
             "Mã đáo thành công - Công thành danh toại",
-            "Sức khỏe dồi dào - Hạnh phúc viên mãn",
-            "Vàng bạc đầy kho - Chẳng chút âu lo",
-            "Sống lâu trăm tuổi - Trẻ mãi không già",
-            "Phúc như Đông Hải - Thọ tỷ Nam Sơn",
-            "An khang trường thọ - Con cháu thảo hiền",
-            "Bách niên giai lão - Vạn sự an nhiên",
-            "Tết này hơn Tết xưa - Tiền vô như nước, tình vào đầy tim",
-            "Năm mới rực rỡ - Đón chờ thành công",
-            "Tiền đầy túi - Ví đầy tiền - Ăn tết vui",
-            "Sự nghiệp thăng hoa - Cả nhà sung túc",
-            "Ăn Tết linh đình - Có bồ cực xinh",
-            "Lộc thịnh viên - Tài thăng hoa",
-            "Tâm an nhiên - Đời hiển vinh",
-            "Phúc đầy nhà - Lộc tận cửa",
-            "Ý cát tường - Sự hanh thông"
+            "Sức khỏe dồi dào - Hạnh phúc viên mãn"
         ];
 
         function randomWish() {
             const randomIndex = Math.floor(Math.random() * wishes.length);
             const wishElement = document.getElementById("wish-display");
-            // Hiệu ứng fade nhẹ
             wishElement.style.opacity = 0;
             setTimeout(() => {
                 wishElement.innerText = wishes[randomIndex];
@@ -1018,60 +1346,67 @@ PHÒNG HẬU CẦN – KỸ THUẬT
             }, 200);
         }
 
-        // 2. ĐẾM NGƯỢC (Tết Bính Ngọ 17/02/2026)
         const tetDate = new Date("Feb 17, 2026 00:00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = tetDate - now;
 
-            // Tính toán thời gian
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Cập nhật đồng hồ to
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            const daysStr = days < 10 ? "0" + days : days;
+            const hoursStr = hours < 10 ? "0" + hours : hours;
+            const minutesStr = minutes < 10 ? "0" + minutes : minutes;
+            const secondsStr = seconds < 10 ? "0" + seconds : seconds;
 
-            // Cập nhật đồng hồ mini trên thanh bar
-            const miniStr = `${days} ngày ${hours}:${minutes}:${seconds}`;
-            document.getElementById("mini-timer").innerText = miniStr;
+            // Update main countdown display
+            updateTimeDisplay("days", daysStr);
+            updateTimeDisplay("hours", hoursStr);
+            updateTimeDisplay("minutes", minutesStr);
+            updateTimeDisplay("seconds", secondsStr);
+
+            // Update mini timer with flip effect
+            updateMiniCountdown("mini-days", daysStr);
+            updateMiniCountdown("mini-hours", hoursStr);
+            updateMiniCountdown("mini-minutes", minutesStr);
+            updateMiniCountdown("mini-seconds", secondsStr);
+        }
+
+        function updateTimeDisplay(elementId, newValue) {
+            const element = document.getElementById(elementId);
+            if (element && element.innerText !== newValue) {
+                element.innerText = newValue;
+            }
+        }
+
+        function updateMiniCountdown(elementId, newValue) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const oldValue = element.innerText;
+            if (oldValue !== newValue) {
+                element.classList.add('flip');
+                setTimeout(() => {
+                    element.innerText = newValue;
+                    element.classList.remove('flip');
+                }, 250);
+            }
         }
 
         setInterval(updateCountdown, 1000);
-        updateCountdown(); // Chạy ngay lập tức
+        updateCountdown();
 
-        // 3. GIẢ LẬP LỊCH ÂM (Đơn giản cho Demo)
-        // Trong thực tế, cần thư viện chuyên dụng để chuyển đổi Dương -> Âm lịch chính xác
         function getSimpleLunarDate() {
             const today = new Date();
-            // Đây chỉ là code giả lập hiển thị ngày âm tượng trưng
-            // Logic: Giả sử hôm nay là ngày thực tế, hiển thị ngày âm tương ứng ước lượng
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const dateStr = today.toLocaleDateString('vi-VN', options);
-            
-            // Text giả định (bạn cần thư viện lunisolar để chính xác)
-            // Ví dụ này hardcode hiển thị ngày giả định là 23 tháng Chạp nếu gần tết
-            let lunarText = "Ngày thường: " + dateStr + " (Dương lịch)";
-            
-            // Check nếu gần ngày Tết 2026 (Demo)
-            const currentYear = today.getFullYear();
-            if(currentYear === 2026 && today.getMonth() === 1 && today.getDate() < 17) {
-                 const lunarDay = 30 - (17 - today.getDate());
-                 lunarText = `<span class="day-number">${lunarDay}</span> tháng Chạp năm Ất Tỵ <span class="snake-icon">🐍</span>`;
-            } else {
-                 lunarText = `Thời gian thực: ${dateStr}`; 
-            }
-            
-            return lunarText;
+            return "Thời gian thực: " + dateStr;
         }
         document.getElementById("lunar-today").innerHTML = getSimpleLunarDate();
 
-        // 4. SCROLL SPY (Menu tự đổi màu đỏ)
         const sections = document.querySelectorAll("section");
         const navLinks = document.querySelectorAll(".nav-link");
 
@@ -1079,8 +1414,6 @@ PHÒNG HẬU CẦN – KỸ THUẬT
             let current = "";
             sections.forEach((section) => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                // -150px để active sớm hơn một chút khi lướt tới
                 if (pageYOffset >= (sectionTop - 150)) {
                     current = section.getAttribute("id");
                 }
@@ -1094,7 +1427,6 @@ PHÒNG HẬU CẦN – KỸ THUẬT
             });
         };
 
-        // 5. MODAL FUNCTIONS
         function openModal(modalId) {
             document.getElementById(modalId).style.display = "block";
         }
@@ -1103,7 +1435,6 @@ PHÒNG HẬU CẦN – KỸ THUẬT
             document.getElementById(modalId).style.display = "none";
         }
 
-        // Close modal when clicking outside
         window.onclick = function(event) {
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => {
@@ -1113,7 +1444,6 @@ PHÒNG HẬU CẦN – KỸ THUẬT
             });
         };
 
-        // Auto play music after user interaction
         document.addEventListener('click', function() {
             const audio = document.getElementById('tet-music');
             if (audio.paused) {
@@ -1121,153 +1451,86 @@ PHÒNG HẬU CẦN – KỸ THUẬT
             }
         }, { once: true });
 
-        // Slideshow
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        function changeSlide(n) {
-            let slides = document.querySelectorAll('#hoa-modal .slide');
-            let current = slideIndex - 1;
-            let next = (slideIndex - 1 + n + slides.length) % slides.length;
-            
-            // Set direction classes
-            if (n > 0) {
-                slides[current].classList.add('prev');
-                slides[next].classList.add('next');
-            } else {
-                slides[current].classList.add('next');
-                slides[next].classList.add('prev');
-            }
-            
-            setTimeout(() => {
-                showSlides(slideIndex += n);
-            }, 50);
+        let slideIndexInline = 1;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let mouseDownX = 0;
+        let isMouseDown = false;
+        
+        function changeSlideInline(n) {
+            showSlidesInline(slideIndexInline += n);
         }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
+        function currentSlideInline(n) {
+            showSlidesInline(slideIndexInline = n);
         }
-
-        function showSlides(n) {
-            let i;
-            let slides = document.querySelectorAll('#hoa-modal .slide');
-            let dots = document.querySelectorAll('#hoa-modal .dot');
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].classList.remove('active', 'prev', 'next');
+        function showSlidesInline(n) {
+            let slides = document.querySelectorAll('.slideshow-container.inline .slide');
+            let dots = document.querySelectorAll('.slideshow-container.inline .dot');
+            if (n > slides.length) {slideIndexInline = 1}
+            if (n < 1) {slideIndexInline = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
             }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
             }
-            slides[slideIndex-1].classList.add('active');
-            dots[slideIndex-1].className += " active";
+            if (slides[slideIndexInline-1]) {
+                slides[slideIndexInline-1].classList.add('active');
+                dots[slideIndexInline-1].classList.add("active");
+            }
+        }
+        showSlidesInline(slideIndexInline);
+        
+        // Touch Swipe Functionality
+        const slideshowContainer = document.querySelector('.slideshow-container.inline');
+        if (slideshowContainer) {
+            slideshowContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            slideshowContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            // Mouse Drag Functionality
+            slideshowContainer.addEventListener('mousedown', (e) => {
+                isMouseDown = true;
+                mouseDownX = e.clientX;
+                slideshowContainer.style.cursor = 'grabbing';
+            });
+            
+            slideshowContainer.addEventListener('mousemove', (e) => {
+                if (!isMouseDown) return;
+                slideshowContainer.style.cursor = 'grabbing';
+            });
+            
+            slideshowContainer.addEventListener('mouseup', (e) => {
+                if (!isMouseDown) return;
+                isMouseDown = false;
+                touchEndX = e.clientX;
+                handleSwipe();
+                slideshowContainer.style.cursor = 'grab';
+            });
+            
+            slideshowContainer.addEventListener('mouseleave', () => {
+                isMouseDown = false;
+                slideshowContainer.style.cursor = 'grab';
+            });
+        }
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    changeSlideInline(1);
+                } else {
+                    changeSlideInline(-1);
+                }
+            }
         }
     </script>
-
-    <!-- Modal for Hoa Tết -->
-    <div id="hoa-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('hoa-modal')">&times;</span>
-            <h2>Ý Nghĩa Các Loài Hoa Tết</h2>
-            <div class="slideshow-container">
-                <div class="slide">
-                    <img src="https://cdn.tgdd.vn/Files/2021/12/03/1402134/tong-hop-10-loai-hoa-trang-tri-tet-dep-va-y-nghia-cua-tung-loai-202112031629132188.jpg" alt="Hoa Đào" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
-                    <div class="slide-text">
-                        <h3>Hoa Đào</h3>
-                        <p>Hoa đào là biểu tượng đặc trưng của mùa xuân miền Bắc, tượng trưng cho sự sinh sôi, đổi mới và may mắn. Sắc hồng thắm của hoa đào được xem là mang lại vượng khí, xua đuổi điều không may, đem đến bình an, hạnh phúc và khởi đầu tốt đẹp cho năm mới.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfaxYvXO_lJP0QyAU20bSGLMVes6KlrYjwOA&s" alt="Hoa Mai" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
-                    <div class="slide-text">
-                        <h3>Hoa Mai</h3>
-                        <p>Hoa mai gắn liền với Tết cổ truyền của người dân miền Nam, tượng trưng cho sự phú quý, thịnh vượng và thành công. Màu vàng rực rỡ của hoa mai thể hiện niềm vui, sự ấm no, sung túc và niềm tin vào tương lai tươi sáng, an lành.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="https://imgcdn.tapchicongthuong.vn/thumb/w_1000/tcct-media/21/3/7/hoa_ly_trang_1.jpg" alt="Hoa Ly" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
-                    <div class="slide-text">
-                        <h3>Hoa Ly</h3>
-                        <p>Hoa ly mang vẻ đẹp thanh cao, tinh khiết, tượng trưng cho sự trang trọng, hòa hợp và đoàn viên. Hương thơm dịu nhẹ của hoa ly thể hiện ước mong về cuộc sống yên ấm, hạnh phúc, sự gắn bó bền chặt giữa các thành viên trong gia đình.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQo6Bfrk2_M_jlC_vdIfwlTUc7457MsarPyQ&s" alt="Hoa Lay Ơn" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
-                    <div class="slide-text">
-                        <h3>Hoa Lay Ơn</h3>
-                        <p>Hoa lay ơn (kiếm lan) với dáng vươn thẳng, mạnh mẽ, biểu trưng cho ý chí vươn lên, sự trung thành và hiếu nghĩa. Hoa lay ơn thường được trưng trong dịp Tết với mong ước năm mới thuận lợi, thành đạt, gia đình sum vầy và cuộc sống ngày càng phát triển.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJv7R0eE5V6fS-484wv37rVExTTGvgNdSG3Q&s" alt="Hoa Cúc" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
-                    <div class="slide-text">
-                        <h3>Hoa Cúc</h3>
-                        <p>Hoa cúc là loài hoa truyền thống gắn bó lâu đời với đời sống văn hóa tinh thần của người Việt trong dịp Tết Nguyên đán. Hoa cúc tượng trưng cho sự trường thọ, phúc lộc, hiếu nghĩa và bền bỉ, thể hiện ước mong về cuộc sống an lành, gia đình hòa thuận, con cháu sum vầy. Sắc vàng tươi của hoa cúc mang ý nghĩa phú quý, thịnh vượng và may mắn, đồng thời biểu trưng cho khí chất ngay thẳng, thanh cao, kiên cường vượt qua khó khăn. Trưng hoa cúc trong ngày Tết còn thể hiện lòng kính trọng đối với tổ tiên, mong cầu một năm mới bình an, ổn định và phát triển bền vững.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="https://images.baodantoc.vn/uploads/2024/Thang-12/Ngay-16/My-Thanh/8b975039f60a905759337df6743a8748hoa-van-tho-tet-29.jpg" alt="Hoa Vạn Thọ" style="width:100%; max-height:300px; object-fit:cover; border-radius:10px;">
-                    <div class="slide-text">
-                        <h3>Hoa Vạn Thọ</h3>
-                        <p>Hoa vạn thọ là loài hoa quen thuộc trong ngày Tết cổ truyền của người Việt, mang ý nghĩa trường thọ, sức khỏe, phúc lộc và may mắn. Tên gọi “vạn thọ” thể hiện ước mong về cuộc sống lâu bền, gia đình bình an, con cháu hiếu thuận, sum vầy. Sắc vàng rực rỡ của hoa vạn thọ tượng trưng cho sự sung túc, thịnh vượng và niềm vui, đồng thời mang ý nghĩa xua đuổi điều không may, đón vận khí tốt lành trong năm mới. Việc trưng hoa vạn thọ trong dịp Tết còn thể hiện lòng kính nhớ tổ tiên, cầu mong một năm mới an khang, hạnh phúc và viên mãn.</p>
-                    </div>
-                </div>
-                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-                <a class="next" onclick="changeSlide(1)">&#10095;</a>
-            </div>
-            <div class="dots">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-                <span class="dot" onclick="currentSlide(5)"></span>
-                <span class="dot" onclick="currentSlide(6)"></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for Mâm Ngũ Quả -->
-    <div id="ngu-qua-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('ngu-qua-modal')">&times;</span>
-            <h2>Ý Nghĩa Mâm Ngũ Quả</h2>
-            <img src="https://upload.wikimedia.org/wikipedia/vi/3/3d/M%C4%83m_ng%C5%A9_qu%E1%BA%A3_T%E1%BA%BFt.png" alt="Mâm Ngũ Quả" style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
-            <p>Mâm ngũ quả là nét đẹp văn hóa truyền thống không thể thiếu trong ngày Tết Nguyên đán của người Việt Nam, thể hiện đạo lý "uống nước nhớ nguồn", lòng hiếu kính đối với tổ tiên và ước vọng về một năm mới an lành, hạnh phúc. "Ngũ quả" tượng trưng cho năm loại quả với năm màu sắc khác nhau, đại diện cho thuyết ngũ hành (Kim – Mộc – Thủy – Hỏa – Thổ), hàm ý mong cầu sự hài hòa của đất trời, vạn vật sinh sôi, gia đình sung túc, đủ đầy.</p>
-            <p>Mỗi loại quả được bày biện trên mâm đều mang một ý nghĩa riêng, gửi gắm ước mong về sức khỏe, tài lộc, may mắn và bình an trong năm mới. Tùy theo phong tục từng vùng miền, mâm ngũ quả có cách lựa chọn và sắp xếp khác nhau, nhưng đều chung một giá trị tinh thần sâu sắc, thể hiện niềm tin, hy vọng và khát vọng vươn lên trong cuộc sống.</p>
-            <p>Trong không khí thiêng liêng của ngày đầu xuân, mâm ngũ quả không chỉ là lễ vật dâng lên tổ tiên mà còn là biểu tượng của sự đoàn viên, gắn kết gia đình, nhắc nhở con cháu gìn giữ và phát huy những giá trị văn hóa truyền thống tốt đẹp của dân tộc Việt Nam.</p>
-        </div>
-    </div>
-
-    <!-- Modal for Các Món Ăn Ngày Tết -->
-    <div id="mon-an-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('mon-an-modal')">&times;</span>
-            <h2>Ý Nghĩa Các Món Ăn Ngày Tết</h2>
-            <img src="https://shop.annam-gourmet.com/pub/media/magefan_blog/m_n_n_ng_y_t_t.png" alt="Thức Ăn Tết" style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
-            <p>Các món ăn ngày Tết của người Việt mang đậm bản sắc truyền thống, thể hiện ước mong no đủ, sum vầy và may mắn trong năm mới. Tiêu biểu có bánh chưng, bánh tét tượng trưng cho đất trời và lòng biết ơn tổ tiên; thịt kho, thịt đông thể hiện sự sung túc; giò chả mang ý nghĩa tròn đầy, gắn kết; dưa hành, củ kiệu giúp cân vị, tượng trưng cho sự hài hòa; canh măng, nem rán góp phần làm phong phú mâm cỗ ngày Tết. Mâm cơm Tết không chỉ là bữa ăn truyền thống mà còn là biểu tượng của tình cảm gia đình và sự đoàn viên.</p>
-        </div>
-    </div>
-    <div id="banh-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('mon-an-modal')">&times;</span>
-            <h2>Ý Nghĩa Các Món Ăn Ngày Tết</h2>
-            <img src="https://vhntbacgiang.edu.vn/wp-content/uploads/2019/06/bc2.jpg" alt="Thức Ăn Tết" style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
-            <p>Bánh chưng – bánh tét là những món bánh truyền thống không thể thiếu trong ngày Tết Nguyên đán của dân tộc Việt Nam, tượng trưng cho lòng biết ơn tổ tiên và ước mong cuộc sống no đủ, ấm no. Bánh chưng hình vuông biểu trưng cho đất, bánh tét dạng trụ dài gắn liền với văn hóa các vùng miền, thể hiện sự sung túc, tròn đầy. Việc gói và dâng bánh trong ngày Tết góp phần gìn giữ truyền thống tốt đẹp, thắt chặt tình cảm gia đình và cầu mong một năm mới an lành, hạnh phúc.</p>
-        </div>
-    </div>
-
-    <!-- Modal for Bàn Thờ Bác Hồ -->
-    <div id="bac-ho-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('bac-ho-modal')">&times;</span>
-            <h2>Ý Nghĩa Bàn Thờ Chủ Tịch Hồ Chí Minh</h2>
-            <img src="https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/469755612_1550389235661542_2156117265039078579_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFlKAeMWvnT_YhIlpS8L4XuxOamReG8677E5qZF4bzrvpccy6zFNfwnEnBhth_m1c6aeFtmG-3FdDJEUTGIF0Cz&_nc_ohc=Hh-MYeeaQDQQ7kNvwEwWZaC&_nc_oc=AdlzOptncIloXwDD5qy8GNP9zsjUqiW9xKPYt94Ky7jV8sIx7YUvhRIneEwXZjV7ECxmaswK2_WQYMy57_00eEUS&_nc_zt=23&_nc_ht=scontent.fdad1-1.fna&_nc_gid=Sft1hcQKiZ5V91UUPbHdAQ&oh=00_AftdA1djAmOudtDImUvv5VhhK0O-vhgXQHaPQ_XTRSOwXw&oe=699117A3" alt="Bàn Thờ Bác Hồ" style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;">
-            <p>Bàn thờ Chủ tịch Hồ Chí Minh trong Quân đội nhân dân Việt Nam có ý nghĩa chính trị, tư tưởng và tinh thần đặc biệt sâu sắc, thể hiện lòng tôn kính và biết ơn vô hạn của cán bộ, chiến sĩ đối với Chủ tịch Hồ Chí Minh – vị lãnh tụ thiên tài của Đảng và Nhân dân ta, người sáng lập, lãnh đạo và rèn luyện Quân đội nhân dân Việt Nam anh hùng. Việc lập và duy trì bàn thờ Bác Hồ tại các cơ quan, đơn vị quân đội là biểu hiện sinh động của truyền thống "uống nước nhớ nguồn", đồng thời là hình thức giáo dục chính trị, tư tưởng trực quan, góp phần nâng cao bản lĩnh chính trị, phẩm chất đạo đức và ý thức trách nhiệm cho bộ đội trong quá trình thực hiện nhiệm vụ.</p>
-            <p>Trước anh linh Chủ tịch Hồ Chí Minh, mỗi cán bộ, chiến sĩ luôn tự soi, tự sửa, nhắc nhở bản thân tuyệt đối trung thành với Đảng, với Tổ quốc và Nhân dân; kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội; chấp hành nghiêm kỷ luật quân đội, pháp luật Nhà nước; không ngừng tu dưỡng, rèn luyện, phấn đấu hoàn thành tốt mọi nhiệm vụ được giao. Bàn thờ Bác Hồ là nơi thể hiện sự kết nối bền chặt giữa truyền thống vẻ vang của Quân đội với nhiệm vụ xây dựng và bảo vệ Tổ quốc trong giai đoạn hiện nay; là không gian linh thiêng để tổ chức các hoạt động sinh hoạt chính trị, lễ báo công, tuyên thệ, qua đó giáo dục, cổ vũ, động viên cán bộ, chiến sĩ phát huy tinh thần đoàn kết, ý chí quyết tâm và lòng tự hào của người quân nhân cách mạng.</p>
-            <p>Trong đời sống sinh hoạt, học tập và công tác hằng ngày, hình ảnh Chủ tịch Hồ Chí Minh trên bàn thờ luôn là điểm tựa tinh thần vững chắc, nhắc nhở cán bộ, chiến sĩ tích cực học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh; giữ gìn lối sống trong sạch, giản dị, khiêm tốn; đề cao tinh thần trách nhiệm, ý thức tổ chức kỷ luật, tác phong công tác khoa học, chính quy. Qua đó, góp phần xây dựng môi trường văn hóa quân sự lành mạnh, củng cố niềm tin, ý chí và sức mạnh tinh thần của đơn vị.</p>
-            <p>Có thể khẳng định, bàn thờ Chủ tịch Hồ Chí Minh trong Quân đội nhân dân Việt Nam không chỉ mang giá trị tâm linh mà còn là biểu tượng thiêng liêng của niềm tin chính trị, là nguồn động viên tinh thần to lớn, góp phần xây dựng Quân đội nhân dân Việt Nam cách mạng, chính quy, tinh nhuệ, từng bước hiện đại, xứng đáng là lực lượng chính trị, lực lượng chiến đấu trung thành, tin cậy của Đảng, Nhà nước và Nhân dân.</p>
-        </div>
-    </div>
 </body>
 </html>
