@@ -517,7 +517,7 @@
             padding: 50px;
             position: relative;
             box-shadow: 0 5px 15px rgba(211, 47, 47, 0.1);
-            background-image: url('https://png.pngtree.com/png-clipart/20190520/original/pngtree-hand-painted-running-red-brown-horse-png-image_4196784.jpg'), linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8));
+            background-image: url('https://maivangrongviet.vn/binh-ngo-sinh-nam-bao-nhieu-hop-voi-menh-gi?srsltid=AfmBOoqzWqNGu_cc-rCeNVySklGd3gjmLmnFBO0U0Pc7kViCI9EhiStV'), linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8));
             background-size: cover, cover;
             background-position: center, center;
             background-blend-mode: overlay;
@@ -536,6 +536,8 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(255,255,0,0.5);
             -webkit-text-stroke: 1px rgba(211,47,47,0.5);
             letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
         }
 
         .btn-change-wish {
@@ -1139,6 +1141,7 @@
             <a href="#countdown" class="nav-link">Đếm ngược</a>
             <a href="#letter" class="nav-link">Thư chúc Tết</a>
             <a href="#meaning" class="nav-link">Ý nghĩa Xuân</a>
+            <a href="#wishes-comments" class="nav-link">Điển Lời Chúc</a>
         </div>
     </nav>
 
@@ -1314,6 +1317,20 @@
                 </div>
             </div>
         </section>
+
+        <section id="wishes-comments">
+            <h2 class="section-title">Điển Lời Chúc</h2>
+            <div class="content-card" style="text-align: center; padding: 50px 30px;">
+                <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.8;">
+                    Bạn có lời chúc mừng năm mới gửi đến Phòng Hậu Cần - Kỹ Thuật hay muốn chia sẻ tiếng nói của mình?<br>
+                    <strong>Hãy điền lời chúc của bạn vào Form dưới đây!</strong>
+                </p>
+                <a href="#" class="btn-submit-wish" onclick="submitWish(event)" style="display: inline-block; background: linear-gradient(135deg, var(--primary-red), #c62828); color: var(--gold); padding: 15px 40px; border-radius: 50px; font-weight: bold; text-decoration: none; font-size: 1.1rem; border: 2px solid var(--gold); transition: all 0.3s; box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3); cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(211, 47, 47, 0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 5px 15px rgba(211, 47, 47, 0.3)';">📝 Gửi Lời Chúc Của Bạn</a>
+                <p style="margin-top: 20px; color: #666; font-size: 0.95rem; font-style: italic;">
+                    Cảm ơn bạn đã dành thời gian chia sẻ lời chúc tốt đẹp!
+                </p>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -1450,6 +1467,17 @@
                 audio.play();
             }
         }, { once: true });
+
+        function submitWish(event) {
+            event.preventDefault();
+            // Thay thế URL_CUA_GOOGLE_FORM bằng link Google Form của bạn
+            const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfyMfxQSMmQa0keXQ9RLXMRdOm4uz7_KH9iUYUFQ41A3pxSEg/viewform?usp=publish-editor";
+            if (formUrl === "YOUR_GOOGLE_FORM_URL_HERE") {
+                alert("Vui lòng cài đặt link Google Form!");
+                return;
+            }
+            window.open(formUrl, '_blank');
+        }
 
         let slideIndexInline = 1;
         let touchStartX = 0;
